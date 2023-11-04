@@ -72,17 +72,12 @@ public class grille {
      * 
      * @return playerID du gagnant
      */
-    public int checkLigne() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < height - 4; j++) {
+    public int checkLigne(int i, int j) {
 
-                if (grille[i][j] != 0) {
-                    if (grille[i][j] == grille[i][j + 1] && grille[i][j + 1] == grille[i][j + 2]
-                            && grille[i][j + 2] == grille[i][j + 3]) {
-                        return grille[i][j];
-                    }
-                }
-
+        if (grille[i][j] != 0) {
+            if (grille[i][j] == grille[i][j + 1] && grille[i][j + 1] == grille[i][j + 2]
+                    && grille[i][j + 2] == grille[i][j + 3]) {
+                return grille[i][j];
             }
         }
 
@@ -96,17 +91,24 @@ public class grille {
      * 
      * @return playerID du gagnant
      */
-    public int checkColonne() {
-        for (int i = 0; i < height - 4; i++) {
-            for (int j = 0; j < height; j++) {
+    public int checkColonne(int i, int j) {
 
-                if (grille[i][j] != 0) {
-                    if (grille[i][j] == grille[i + 1][j] && grille[i + 1][j] == grille[i + 2][j]
-                            && grille[i + 2][j] == grille[i + 3][j]) {
-                        return grille[i][j];
-                    }
-                }
+        if (grille[i][j] != 0) {
+            if (grille[i][j] == grille[i + 1][j] && grille[i + 1][j] == grille[i + 2][j]
+                    && grille[i + 2][j] == grille[i + 3][j]) {
+                return grille[i][j];
+            }
+        }
 
+        return 0;
+    }
+
+    public int chechDiagonal(int i, int j) {
+
+        if (grille[i][j] != 0) {
+            if (grille[i][j] == grille[i + 1][j + 1] && grille[i + 1][j + 1] == grille[i + 2][j + 2]
+                    && grille[i + 2][j + 2] == grille[i + 3][j + 3]) {
+                return grille[i][j];
             }
         }
 
@@ -120,6 +122,16 @@ public class grille {
      * @return playerID
      */
     public int hasWon() {
+        /*
+         * for i height -4
+         * for j width -4
+         * if i> w-3 chechcolonne
+         * if j>h-3 chechligne
+         * else checkligne checkcolone check diag
+         * 
+         * 
+         * 
+         */
 
         return 0;
     }
