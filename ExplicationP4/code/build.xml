@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="explicationP4" default="compile" basedir=".">
+
+<property name="projet.sources.dir" value="src"/>
+<property name="projet.bin.dir" value="bin/"/>
+<property name="projet.doc.dir" value="doc"/>
+
+
+<path id="projet.classpath">
+	<pathelement location="${projet.bin.dir}" />
+</path>
+
+<target name="compile" description="Compilation des classes" depends="prepare">
+	<javac srcdir="${projet.sources.dir}" destdir="${projet.bin.dir}" debug="on" optimize="off" deprecation="on" includeantruntime="false">
+		<classpath refid="projet.classpath"/>
+	</javac>
+</target>
+
+<target name="prepare" description="prepare le projet" depends="clean">
+	<mkdir dir="${projet.bin.dir}" />
+</target>
+
+<target name="clean">
+  <echo>=== CLEAN ===</echo>
+  <delete failonerror="false" includeEmptyDirs="true">
+    <fileset dir="${projet.doc.dir}" includes="**/*"/>
+	<fileset dir="${projet.bin.dir}" includes="**/*"/>
+  </delete>
+</target>
+
+<!-- ()
+target name="cleanExp" >
+  <echo>=== CLEAN ===</echo>
+  <delete includeEmptyDirs="true">
+    <fileset dir="${projet.rTables.dir}" includes="**/*"/>
+	<fileset dir="${projet.exp.dir}" includes="**/*"/>
+  </delete>
+</target> 
+-->
+
+
+
+<target name="run" description="execution" depends="compile">
+	<java classname="puissance4.model.Main" fork="true">
+		<classpath refid="projet.classpath"/>
+	</java>
+</target>
+
+
+<target name="javadoc">
+	<javadoc sourcepath="src" destdir="doc" encoding="utf8">
+	<fileset dir="src" defaultexcludes="yes">
+		<include name="**.java" />
+	</fileset>
+	</javadoc>
+</target>
+
+</project>

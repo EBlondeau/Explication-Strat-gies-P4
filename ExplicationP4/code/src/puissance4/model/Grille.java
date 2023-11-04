@@ -1,13 +1,14 @@
+package puissance4.model;
 import java.util.Arrays;
 
-public class grille {
+public class Grille {
 
     public int height;
     public int width;
     public int[][] grille;
     public int[] state;
 
-    public grille(int height, int width) {
+    public Grille(int height, int width) {
         this.height = height;
         this.width = width;
         this.grille = new int[width][height];

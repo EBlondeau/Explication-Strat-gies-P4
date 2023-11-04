@@ -1,9 +1,10 @@
+package puissance4.model;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
 
-        grille g = new grille(6, 7);
+        Grille g = new Grille(6, 7);
         g.showGrille();
         g.showState();
         System.out.println(Arrays.toString(g.getValidPlay()));
