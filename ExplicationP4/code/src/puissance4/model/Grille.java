@@ -1,4 +1,5 @@
 package puissance4.model;
+
 import java.util.Arrays;
 
 public class Grille {
@@ -21,7 +22,7 @@ public class Grille {
      * affiche la grille
      */
     public void showGrille() {
-        System.out.println(Arrays.deepToString(grille));
+        System.out.println(Arrays.deepToString(grille).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
     }
 
     /**
@@ -61,7 +62,7 @@ public class Grille {
             System.out.println("gros naze");
             return;
         } else {
-            grille[state[columns] + 1][columns] = playerID;
+            grille[height - state[columns]][columns] = playerID;
             state[columns] += 1;
         }
     }
@@ -104,11 +105,23 @@ public class Grille {
         return 0;
     }
 
-    public int chechDiagonal(int i, int j) {
+    public int checkDiagonal(int i, int j) {
 
         if (grille[i][j] != 0) {
             if (grille[i][j] == grille[i + 1][j + 1] && grille[i + 1][j + 1] == grille[i + 2][j + 2]
                     && grille[i + 2][j + 2] == grille[i + 3][j + 3]) {
+                return grille[i][j];
+            }
+        }
+
+        return 0;
+    }
+
+    public int checkDiagonalBw(int i, int j) {
+
+        if (grille[i][j] != 0) {
+            if (grille[i][j] == grille[i - 1][j + 1] && grille[i - 1][j + 1] == grille[i - 2][j + 2]
+                    && grille[i - 2][j + 2] == grille[i - 3][j + 3]) {
                 return grille[i][j];
             }
         }
@@ -123,6 +136,58 @@ public class Grille {
      * @return playerID
      */
     public int hasWon() {
+        int res = 0;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (i < height - 3 && j < width - 3) {
+                    res = checkDiagonal(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkColonne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkLigne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                }
+                if (2 < i && i < height - 3 && 2 < j && j < width - 3) {
+
+                    res = checkDiagonal(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkColonne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkLigne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkLigne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                } else if (i < height - 3) {
+                    res = checkDiagonalBw(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                } else if (j < width - 3) {
+                    res = checkLigne(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                    res = checkDiagonalBw(i, j);
+                    if (res != 0) {
+                        return res;
+                    }
+                }
+            }
+        }
         /*
          * for i height -4
          * for j width -4
