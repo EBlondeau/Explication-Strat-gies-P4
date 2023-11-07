@@ -75,10 +75,11 @@ public class Grille {
      * @return playerID du gagnant
      */
     public int checkLigne(int i, int j) {
+        int c = grille[i][j];
 
-        if (grille[i][j] != 0) {
-            if (grille[i][j] == grille[i][j + 1] && grille[i][j + 1] == grille[i][j + 2]
-                    && grille[i][j + 2] == grille[i][j + 3]) {
+        if (c != 0) {
+            if (c == grille[i][j + 1] && c == grille[i][j + 2]
+                    && c == grille[i][j + 3]) {
                 return grille[i][j];
             }
         }
@@ -94,10 +95,11 @@ public class Grille {
      * @return playerID du gagnant
      */
     public int checkColonne(int i, int j) {
+        int c = grille[i][j];
 
-        if (grille[i][j] != 0) {
-            if (grille[i][j] == grille[i + 1][j] && grille[i + 1][j] == grille[i + 2][j]
-                    && grille[i + 2][j] == grille[i + 3][j]) {
+        if (c != 0) {
+            if (c == grille[i + 1][j] && c == grille[i + 2][j]
+                    && c == grille[i + 3][j]) {
                 return grille[i][j];
             }
         }
@@ -106,10 +108,11 @@ public class Grille {
     }
 
     public int checkDiagonal(int i, int j) {
+        int c = grille[i][j];
 
-        if (grille[i][j] != 0) {
-            if (grille[i][j] == grille[i + 1][j + 1] && grille[i + 1][j + 1] == grille[i + 2][j + 2]
-                    && grille[i + 2][j + 2] == grille[i + 3][j + 3]) {
+        if (c != 0) {
+            if (c == grille[i + 1][j + 1] && c == grille[i + 2][j + 2]
+                    && c == grille[i + 3][j + 3]) {
                 return grille[i][j];
             }
         }
@@ -119,13 +122,14 @@ public class Grille {
 
     public int checkDiagonalBw(int i, int j) {
 
-        if (grille[i][j] != 0) {
-            if (grille[i][j] == grille[i - 1][j + 1] && grille[i - 1][j + 1] == grille[i - 2][j + 2]
-                    && grille[i - 2][j + 2] == grille[i - 3][j + 3]) {
+        int c = grille[i][j];
+
+        if (c != 0) {
+            if (c == grille[i - 1][j + 1] && c == grille[i - 2][j + 2]
+                    && c == grille[i - 3][j + 3]) {
                 return grille[i][j];
             }
         }
-
         return 0;
     }
 
@@ -139,51 +143,33 @@ public class Grille {
         int res = 0;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (i < height - 3 && j < width - 3) {
-                    res = checkDiagonal(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                    res = checkColonne(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                    res = checkLigne(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                }
-                if (2 < i && i < height - 3 && 2 < j && j < width - 3) {
 
-                    res = checkDiagonal(i, j);
-                    if (res != 0) {
-                        return res;
+                if (grille[i][j] != 0) {
+                    if (j < height - 3) {
+                        res = checkLigne(i, j);
+                        if (res != 0) {
+                            return res;
+                        }
                     }
-                    res = checkColonne(i, j);
-                    if (res != 0) {
-                        return res;
+                    if (i < width - 3) {
+                        res = checkColonne(i, j);
+                        if (res != 0) {
+                            return res;
+                        }
+
                     }
-                    res = checkLigne(i, j);
-                    if (res != 0) {
-                        return res;
+                    if (i < width - 3 && j < height - 3) {
+                        res = checkDiagonal(i, j);
+                        if (res != 0) {
+                            return res;
+                        }
                     }
-                    res = checkLigne(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                } else if (i < height - 3) {
-                    res = checkDiagonalBw(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                } else if (j < width - 3) {
-                    res = checkLigne(i, j);
-                    if (res != 0) {
-                        return res;
-                    }
-                    res = checkDiagonalBw(i, j);
-                    if (res != 0) {
-                        return res;
+                    if (i > 2 && j <= height - 3) {
+
+                        res = checkDiagonalBw(i, j);
+                        if (res != 0) {
+                            return res;
+                        }
                     }
                 }
             }
@@ -199,6 +185,6 @@ public class Grille {
          * 
          */
 
-        return 0;
+        return -1;
     }
 }
