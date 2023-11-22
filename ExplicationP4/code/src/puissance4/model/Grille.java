@@ -187,4 +187,15 @@ public class Grille {
 
         return -1;
     }
+
+    public Grille copyGrille(Grille g) {
+        Grille res = new Grille(g.width, g.height);
+        for (int i = 0; i < g.height; i++) {
+            for (int j = 0; j < g.width; j++) {
+                res.grille[i][j] = g.grille[i][j];
+            }
+        }
+
+        return res;
+    }
 }

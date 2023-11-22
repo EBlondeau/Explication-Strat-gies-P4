@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) {
 
         Grille g = new Grille(6, 7);
-        g.showGrille();
-        g.showState();
-        System.out.println(Arrays.toString(g.getValidPlay()));
+        // g.showGrille();
+        // g.showState();
+        // System.out.println(Arrays.toString(g.getValidPlay()));
         g.play(1, 0);
         g.play(1, 0);
         g.play(1, 0);
@@ -29,6 +29,8 @@ public class Main {
         g.grille[2][0] = 4;
 
         g.showGrille();
+        Grille g2 = g.copyGrille(g);
+        g2.showGrille();
         System.out.println(g.hasWon());
 
     }
