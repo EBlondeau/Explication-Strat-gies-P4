@@ -1,5 +1,7 @@
 package puissance4.model;
 
+import java.util.Arrays;
+
 /*
  * Interface représentant un état d'un jeu
  */
@@ -29,8 +31,10 @@ public class State {
      */
     public State(State state) {
         this.game = state.getGame();
+        this.colState=state.colState;
         this.currentPlayer = state.getCurrentPlayer();
         int[][] oldStateGrille = state.getGrille();
+        this.grille = new int[this.game.getWidth()][this.game.getHeight()];
         for (int i = 0; i < this.game.getWidth(); i++) {
             for (int j = 0; j < this.game.getHeight(); j++) {
                 this.grille[i][j] = oldStateGrille[i][j];
@@ -177,4 +181,10 @@ public class State {
         return this.game;
     }
 
+
+    /** UTILS **/
+
+    public void printState(){
+        System.out.println(Arrays.deepToString(grille).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+    }
 }
