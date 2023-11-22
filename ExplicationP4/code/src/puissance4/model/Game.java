@@ -45,8 +45,12 @@ public class Game {
         return this.player2;
     }
 
-    public State getCurrenState() {
+    public State getCurrentState() {
         return this.currentState;
+    }
+
+    public void updateState(State state){
+        this.currentState=state;
     }
 
 }
