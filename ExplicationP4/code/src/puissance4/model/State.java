@@ -37,20 +37,12 @@ public class State {
         }
     }
 
-
-    /**
-     * Deepcopy d'un état de puissance quatre
-     * @param etat l'état a copier
-     */
-    public EtatPuissanceQuatre(EtatPuissanceQuatre etat){
-
-    }
     public boolean hasWon() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'hasWon'");
     }
 
-    public EtatPuissanceQuatre play(int move) {
+    public State play(int move) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'nextState'");
     }
