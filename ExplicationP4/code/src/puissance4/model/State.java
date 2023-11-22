@@ -5,9 +5,6 @@ package puissance4.model;
  */
 public class State {
 
-    public static final int height = 6;
-    public static final int width = 7;
-
     private int[][] grille;
     private Game game;
     private Player currentPlayer;
@@ -20,9 +17,9 @@ public class State {
      */
     public State(Game game) {
         this.game = game;
-        this.grille = new int[width][height];
+        this.grille = new int[this.game.getWidth()][this.game.getHeight()];
         this.currentPlayer = this.game.getp1();
-        this.colState = new int[width];
+        this.colState = new int[this.game.getWidth()];
     }
 
     /**
@@ -34,8 +31,8 @@ public class State {
         this.game = state.getGame();
         this.currentPlayer = state.getCurrentPlayer();
         int[][] oldStateGrille = state.getGrille();
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < this.game.getWidth(); i++) {
+            for (int j = 0; j < this.game.getHeight(); j++) {
                 this.grille[i][j] = oldStateGrille[i][j];
             }
         }
@@ -104,30 +101,30 @@ public class State {
     public boolean hasWon() {
         boolean r = false;
         int res = 0;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < this.game.getWidth(); i++) {
+            for (int j = 0; j < this.game.getHeight(); j++) {
 
                 if (grille[i][j] != 0) {
-                    if (j < height - 3) {
+                    if (j < this.game.getHeight() - 3) {
                         res = checkLigne(i, j);
                         if (res == currentPlayer.id) {
                             return r;
                         }
                     }
-                    if (i < width - 3) {
+                    if (i < this.game.getWidth() - 3) {
                         res = checkColonne(i, j);
                         if (res == currentPlayer.id) {
                             return r;
                         }
 
                     }
-                    if (i < width - 3 && j < height - 3) {
+                    if (i < this.game.getWidth() - 3 && j < this.game.getHeight() - 3) {
                         res = checkDiagonal(i, j);
                         if (res == currentPlayer.id) {
                             return r;
                         }
                     }
-                    if (i > 2 && j <= height - 3) {
+                    if (i > 2 && j <= this.game.getHeight() - 3) {
 
                         res = checkDiagonalBw(i, j);
                         if (res == currentPlayer.id) {
@@ -141,15 +138,15 @@ public class State {
     }
 
     /**
-     * renvoie une liste de taille width indiquant l'etat jouable ou non des
+     * renvoie une liste de taille this.game.getWidth() indiquant l'etat jouable ou non des
      * colonnes
      * 
      * @return list of valid plays
      */
     public boolean[] getValidPlay() {
-        boolean[] res = new boolean[width];
-        for (int i = 0; i < width; i++) {
-            if (colState[i] != height) {
+        boolean[] res = new boolean[this.game.getWidth()];
+        for (int i = 0; i < this.game.getWidth(); i++) {
+            if (colState[i] != this.game.getHeight()) {
                 res[i] = true;
             }
         }
@@ -162,7 +159,7 @@ public class State {
             System.out.println("gros naze");
             throw new UnknownError("move non valide");
         } else {
-            grille[height - colState[move]][move] = currentPlayer.id;
+            grille[this.game.getHeight() - colState[move]][move] = currentPlayer.id;
             colState[move] += 1;
             return new State(this);
         }
