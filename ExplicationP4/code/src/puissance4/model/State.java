@@ -31,7 +31,7 @@ public class State {
      */
     public State(State state) {
         this.game = state.getGame();
-        this.colState=state.colState;
+        this.colState = state.colState;
         this.currentPlayer = state.getCurrentPlayer();
         int[][] oldStateGrille = state.getGrille();
         this.grille = new int[this.game.getWidth()][this.game.getHeight()];
@@ -142,7 +142,8 @@ public class State {
     }
 
     /**
-     * renvoie une liste de taille this.game.getWidth() indiquant l'etat jouable ou non des
+     * renvoie une liste de taille this.game.getWidth() indiquant l'etat jouable ou
+     * non des
      * colonnes
      * 
      * @return list of valid plays
@@ -173,6 +174,14 @@ public class State {
         return this.currentPlayer;
     }
 
+    public Player getNextPlayer() {
+        if (currentPlayer.id == 1) {
+            return this.game.getp2();
+        } else {
+            return this.game.getp1();
+        }
+    }
+
     public int[][] getGrille() {
         return this.grille;
     }
@@ -181,10 +190,9 @@ public class State {
         return this.game;
     }
 
-
     /** UTILS **/
 
-    public void printState(){
+    public void printState() {
         System.out.println(Arrays.deepToString(grille).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
     }
 }
