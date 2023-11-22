@@ -13,7 +13,8 @@ public class State {
     private Player currentPlayer;
 
     /**
-     * Constructeur de l'état initial d'une parte de puissance quatre
+     * Constructeur d'un état initial
+     * @param game
      */
     public State(Game game){
         this.game=game;
@@ -21,14 +22,16 @@ public class State {
         this.currentPlayer=this.game.getp1();
     }
 
+    /**
+     * Deepcopy d'un état
+     * @param state
+     */
     public State(State state){
         this.game=state.getGame();
         this.currentPlayer=state.getCurrentPlayer();
-        
-        int [][] grille= new int[width][height];
         int [][] oldStateGrille= state.getGrille();
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 this.grille[i][j] = oldStateGrille[i][j];
             }
         }

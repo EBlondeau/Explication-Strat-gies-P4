@@ -6,6 +6,19 @@ public class Game {
     public Player player2;
     public State currentState;
 
+
+    public Game(){
+        this.player1= new Player(1);
+        this.player2= new Player(2);
+        this.currentState= new State(this);
+    }
+
+    public Game(Player p1, Player p2){
+        this.player1= p1;
+        this.player2= p2;
+        this.currentState= new State(this);
+    }
+
     public Game(Player player1, Player player2, State currentState) {
         this.player1 = player1;
         this.player2 = player2;
