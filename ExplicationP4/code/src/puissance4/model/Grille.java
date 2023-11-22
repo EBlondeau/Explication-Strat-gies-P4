@@ -189,9 +189,9 @@ public class Grille {
     }
 
     public Grille copyGrille(Grille g) {
-        Grille res = new Grille(g.width, g.height);
-        for (int i = 0; i < g.height; i++) {
-            for (int j = 0; j < g.width; j++) {
+        Grille res = new Grille(g.height, g.width);
+        for (int i = 0; i < g.width; i++) {
+            for (int j = 0; j < g.height; j++) {
                 res.grille[i][j] = g.grille[i][j];
             }
         }

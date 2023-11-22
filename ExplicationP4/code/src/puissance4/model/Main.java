@@ -31,6 +31,10 @@ public class Main {
         g.showGrille();
         Grille g2 = g.copyGrille(g);
         g2.showGrille();
+        g.play(1, 3);
+        g.showGrille();
+
+        g2.showGrille();
         System.out.println(g.hasWon());
 
     }
