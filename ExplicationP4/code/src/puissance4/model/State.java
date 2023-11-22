@@ -39,6 +39,7 @@ public class State {
                 this.grille[i][j] = oldStateGrille[i][j];
             }
         }
+        this.game.updateState(this);
     }
 
     public int checkLigne(int i, int j) {
