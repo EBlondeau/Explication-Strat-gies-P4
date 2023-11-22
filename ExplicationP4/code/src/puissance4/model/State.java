@@ -15,16 +15,10 @@ public class State {
     /**
      * Constructeur de l'état initial d'une parte de puissance quatre
      */
-    public State(){
-        this.game= new Game();
-        this.grille = new int[width][height];
-        this.currentPlayer=this.game.getp1();
-    }
-
     public State(Game game){
         this.game=game;
         this.grille=new int[width][height];
-        this.currentPlayer=this.game.getp1;
+        this.currentPlayer=this.game.getp1();
     }
 
     public State(State state){
