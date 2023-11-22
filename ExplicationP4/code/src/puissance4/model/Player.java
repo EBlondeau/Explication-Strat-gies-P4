@@ -6,7 +6,8 @@ public class Player {
     protected IStrategy strategy;
     public int id;
 
-    public Player(int id) {
+    public Player(int id, IStrategy strategy) {
         this.id = id;
+        this.strategy = strategy;
     }
 }
