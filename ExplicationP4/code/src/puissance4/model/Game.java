@@ -5,10 +5,10 @@ import puissance4.strategy.RandomStrategy;
 
 public class Game {
 
-    public Player player1;
-    public Player player2;
-    public State currentState;
-    public static final IStrategy DEFAULT_STRATEGY = new RandomStrategy();
+    private Player player1;
+    private Player player2;
+    private State currentState;
+    private static final IStrategy DEFAULT_STRATEGY = new RandomStrategy();
 
     public Game() {
         this.player1 = new Player(1, DEFAULT_STRATEGY);
