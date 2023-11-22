@@ -1,39 +1,71 @@
 package puissance4.model;
 
-import java.util.*;
-
+/*
+ * Interface représentant un état d'un jeu
+ */
 public class State {
-    public Player currentPlayer;
-    public Grille grille;
-    public Player[] players;
+    
+    public static final int height=6;
+    public static final int width=7;
 
-    public State(Player currentPlayer, Grille grille) {
-        this.currentPlayer = currentPlayer;
-        this.grille = grille;
+    private int[][] grille;
+    private Game game;
+    private Player currentPlayer;
 
+    /**
+     * Constructeur de l'état initial d'une parte de puissance quatre
+     */
+    public State(){
+        this.game= new Game();
+        this.grille = new int[width][height];
+        this.currentPlayer=this.game.getp1();
     }
 
-    public Player nextPlayer() {
+    public State(Game game){
+        this.game=game;
+        this.grille=new int[width][height];
+        this.currentPlayer=this.game.getp1;
+    }
 
-        {
-            return null;
+    public State(State state){
+        this.game=state.getGame();
+        this.currentPlayer=state.getCurrentPlayer();
+        
+        int [][] grille= new int[width][height];
+        int [][] oldStateGrille= state.getGrille();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                this.grille[i][j] = oldStateGrille[i][j];
+            }
         }
     }
 
-    public State nextState(int coup) {
 
-        grille.play(currentPlayer.id, coup);
-        return new State(nextPlayer(), grille);
+    /**
+     * Deepcopy d'un état de puissance quatre
+     * @param etat l'état a copier
+     */
+    public EtatPuissanceQuatre(EtatPuissanceQuatre etat){
+
+    }
+    public boolean hasWon() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hasWon'");
     }
 
-    public State[] allNextStates() {
-        State[] res = null;
-        int width = grille.width;
-        for (int i = 0; i < width; i++) {
-            Grille g2 = new Grille(grille.height, grille.width);
-            g2 = grille;
-            g2.play(currentPlayer.id, i);
-        }
-        return res;
+    public EtatPuissanceQuatre play(int move) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nextState'");
     }
+
+    public int[] getMoves() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMoves'");
+    }
+
+    public Player getCurrentPlayer(){ return this.currentPlayer;}
+    public int[][] getGrille(){ return this.grille; }
+    public Game getGame(){ return this.game; }
+
+
 }
