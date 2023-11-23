@@ -5,8 +5,8 @@ import puissance4.strategy.RandomStrategy;
 
 public class Game {
 
-    public static final int DEFAULT_HEIGHT=7;
-    public static final int DEFAULT_WIDTH=6;
+    public static final int DEFAULT_HEIGHT=6;
+    public static final int DEFAULT_WIDTH=7;
 
     private int height;
     private int width;
