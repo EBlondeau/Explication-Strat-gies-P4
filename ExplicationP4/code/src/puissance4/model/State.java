@@ -1,5 +1,7 @@
 package puissance4.model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -111,27 +113,27 @@ public class State {
                 if (grille[i][j] != 0) {
                     if (j < this.game.getHeight() - 3) {
                         res = checkLigne(i, j);
-                        if (res == currentPlayer.id) {
+                        if (res == currentPlayer.getId()) {
                             return r;
                         }
                     }
                     if (i < this.game.getWidth() - 3) {
                         res = checkColonne(i, j);
-                        if (res == currentPlayer.id) {
+                        if (res == currentPlayer.getId()) {
                             return r;
                         }
 
                     }
                     if (i < this.game.getWidth() - 3 && j < this.game.getHeight() - 3) {
                         res = checkDiagonal(i, j);
-                        if (res == currentPlayer.id) {
+                        if (res == currentPlayer.getId()) {
                             return r;
                         }
                     }
                     if (i > 2 && j <= this.game.getHeight() - 3) {
 
                         res = checkDiagonalBw(i, j);
-                        if (res == currentPlayer.id) {
+                        if (res == currentPlayer.getId()) {
                             return r;
                         }
                     }
@@ -148,24 +150,27 @@ public class State {
      * 
      * @return list of valid plays
      */
-    public boolean[] getValidPlay() {
-        boolean[] res = new boolean[this.game.getWidth()];
+    public ArrayList<Integer> getValidPlay() {
+        ArrayList<Integer> res = new ArrayList<>();
         for (int i = 0; i < this.game.getWidth(); i++) {
-            if (colState[i] != this.game.getHeight()) {
-                res[i] = true;
+            if (colState[i] < this.game.getHeight()) {
+                res.add(i);
             }
         }
         return res;
     }
 
     public State play(int move) throws UnknownError {
-        boolean[] plays = this.getValidPlay();
-        if (plays[move] == false) {
+        ArrayList<Integer> plays= this.getValidPlay();
+        if (!plays.contains(move)) {
             System.out.println("gros naze");
             throw new UnknownError("move non valide");
         } else {
-            grille[this.game.getHeight() - colState[move]][move] = currentPlayer.id;
+            System.out.println(move);
+            System.out.println(colState[move]);
+            grille[this.game.getHeight()-2 - colState[move]][move] = currentPlayer.getId();
             colState[move] += 1;
+            currentPlayer=this.getNextPlayer();
             return new State(this);
         }
     }
@@ -175,7 +180,7 @@ public class State {
     }
 
     public Player getNextPlayer() {
-        if (currentPlayer.id == 1) {
+        if (currentPlayer.getId() == 1) {
             return this.game.getp2();
         } else {
             return this.game.getp1();
