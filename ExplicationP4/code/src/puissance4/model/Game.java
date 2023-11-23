@@ -5,8 +5,8 @@ import puissance4.strategy.RandomStrategy;
 
 public class Game {
 
-    public static final int DEFAULT_HEIGHT=6;
-    public static final int DEFAULT_WIDTH=7;
+    public static final int DEFAULT_HEIGHT=7;
+    public static final int DEFAULT_WIDTH=6;
 
     private int height;
     private int width;
@@ -68,6 +68,8 @@ public class Game {
         this.player1 = player1;
         this.player2 = player2;
         this.currentState = currentState;
+        this.player1.setGame(this);
+        this.player2.setGame(this);
     }
 
     /*
