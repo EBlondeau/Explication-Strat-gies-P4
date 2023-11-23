@@ -13,7 +13,7 @@ public class Player {
     }
 
     public void play(){
-        this.strategy.playStrategy(this, this.game);
+        this.strategy.playStrategy(game.getCurrentState());
     }
 
     public int getId(){

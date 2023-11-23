@@ -7,5 +7,5 @@ import puissance4.model.Game;
  * Interface for players' strategies.
  */
 public interface IStrategy {
-    public void playStrategy(Player p, Game g);
+    public int playStrategy(State state); /** TODO: Fix implementations */
 }
