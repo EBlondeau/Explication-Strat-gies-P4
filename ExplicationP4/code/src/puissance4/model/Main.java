@@ -5,37 +5,18 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        Grille g = new Grille(6, 7);
-        // g.showGrille();
-        // g.showState();
-        // System.out.println(Arrays.toString(g.getValidPlay()));
-        g.play(1, 0);
-        g.play(1, 0);
-        g.play(1, 0);
-        g.play(2, 0);
+        Game game= new Game();
 
-        g.play(1, 1);
-        g.play(1, 1);
+        game.getCurrentState().printState();
 
-        g.play(1, 2);
-        g.play(2, 2);
-        g.play(1, 2);
+        /*while(!game.getCurrentState().hasWon()){
+            game.getCurrentState().getCurrentPlayer().play();
+            game.getCurrentState().printState();
+        }*/
 
-        g.play(2, 3);
-        g.play(2, 3);
-        g.play(2, 3);
-        g.play(1, 3);
+        game.getCurrentState().play(1);
+        game.getCurrentState().printState();
 
-        g.grille[2][0] = 4;
-
-        g.showGrille();
-        Grille g2 = g.copyGrille(g);
-        g2.showGrille();
-        g.play(1, 3);
-        g.showGrille();
-
-        g2.showGrille();
-        System.out.println(g.hasWon());
 
     }
 }
