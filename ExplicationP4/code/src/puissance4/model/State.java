@@ -27,9 +27,8 @@ public class State {
     }
 
     /**
-     * Deepcopy d'un état
-     * 
-     * @param state
+     * State deepcopy
+     * @param state the state to deepcopy
      */
     public State(State state) {
         this.game = state.getGame();
@@ -42,7 +41,20 @@ public class State {
                 this.grille[i][j] = oldStateGrille[i][j];
             }
         }
-        this.game.updateState(this);
+    }
+
+    /**
+     * Constructor for a State
+     * @param grille the grid
+     * @param colState the state of each columns (are they full or not)
+     * @param game the game which the state is associated to
+     * @param currentPlayer the current player on this state
+     */
+    public State(int[][] grille, int[] colState, Game game, Player currentPlayer){
+        this.game= game;
+        this.colState= colState;
+        this.currentPlayer = currentPlayer;
+        this.grille= grille;
     }
 
     public int checkLigne(int i, int j) {
@@ -160,18 +172,59 @@ public class State {
         return res;
     }
 
-    public State play(int move) throws UnknownError {
+    /**
+     * Function playing a move and returning the next state, aswell as updating currentState in the game to the next state
+     * @param move the move to play
+     * @return the next state
+     * @throws UnknownError if move is invalid
+     */
+    public State play(int move) throws UnknownError{
+        return this.play(move, true);
+    }
+
+    /**
+     * Function playing a move and returning the next state
+     * @param move the move to play
+     * @param updateGame true if updates the game currentState, false otherwise
+     * @return the next state
+     * @throws UnknownError if move is invalid
+     */
+    public State play(int move, boolean updateGame) throws UnknownError {
         ArrayList<Integer> plays= this.getValidPlay();
         if (!plays.contains(move)) {
             System.out.println("gros naze");
             throw new UnknownError("move non valide");
         } else {
-            System.out.println(move);
-            System.out.println(colState[move]);
-            grille[this.game.getHeight()-2 - colState[move]][move] = currentPlayer.getId();
-            colState[move] += 1;
-            currentPlayer=this.getNextPlayer();
-            return new State(this);
+            //System.out.println(move);
+            //System.out.println(colState[move]);
+
+            int gWidth= this.game.getWidth();
+            int gHeight= this.game.getHeight();
+        
+            // DeepCopy grille en premier
+            int[][] newGrille= new int[gWidth][gHeight];
+            for (int i = 0; i < gWidth; i++) {
+                for (int j = 0; j < gHeight; j++) {
+                    newGrille[i][j] = this.grille[i][j];
+                }
+            }
+
+            // Applique le coup sur la nouvelle grille
+            newGrille[gHeight-2 - colState[move]][move] = currentPlayer.getId(); /** TODO: Fix this, seems broken */
+
+            //DeepCopy colState
+            int[] newColState= new int[gWidth];
+            for(int i =0; i<gWidth; i++){
+                newColState[i]=colState[i];
+            }
+
+            //Update le nouveau colState
+            newColState[move] += 1;
+
+            // Retourne un nouveau state correspondant au State courant après avoir effectué le coup
+            State nextState= new State(newGrille, newColState, this.game, this.getNextPlayer());
+            if(updateGame) this.game.updateState(nextState);
+            return nextState;
         }
     }
 
