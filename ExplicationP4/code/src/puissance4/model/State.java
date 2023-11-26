@@ -21,13 +21,14 @@ public class State {
      */
     public State(Game game) {
         this.game = game;
-        this.grille = new int[this.game.getWidth()][this.game.getHeight()];
+        this.grille = new int[this.game.getWidth()][this.game.getHeight()]; // WIDTH columns of size HEIGHT
         this.currentPlayer = this.game.getp1();
         this.colState = new int[this.game.getWidth()];
     }
 
     /**
      * State deepcopy
+     * 
      * @param state the state to deepcopy
      */
     public State(State state) {
@@ -45,16 +46,17 @@ public class State {
 
     /**
      * Constructor for a State
-     * @param grille the grid
-     * @param colState the state of each columns (are they full or not)
-     * @param game the game which the state is associated to
+     * 
+     * @param grille        the grid
+     * @param colState      the state of each columns (are they full or not)
+     * @param game          the game which the state is associated to
      * @param currentPlayer the current player on this state
      */
-    public State(int[][] grille, int[] colState, Game game, Player currentPlayer){
-        this.game= game;
-        this.colState= colState;
+    public State(int[][] grille, int[] colState, Game game, Player currentPlayer) {
+        this.game = game;
+        this.colState = colState;
         this.currentPlayer = currentPlayer;
-        this.grille= grille;
+        this.grille = grille;
     }
 
     public int checkLigne(int i, int j) {
@@ -116,43 +118,53 @@ public class State {
         return 0;
     }
 
-    public boolean hasWon() {
-        boolean r = false;
-        int res = 0;
+    public int hasWon() {
+        int winner = 0;
         for (int i = 0; i < this.game.getWidth(); i++) {
             for (int j = 0; j < this.game.getHeight(); j++) {
 
                 if (grille[i][j] != 0) {
                     if (j < this.game.getHeight() - 3) {
-                        res = checkLigne(i, j);
-                        if (res == currentPlayer.getId()) {
-                            return r;
+                        winner = checkLigne(i, j);
+                        if (winner != 0) {
+                            return winner;
                         }
                     }
                     if (i < this.game.getWidth() - 3) {
-                        res = checkColonne(i, j);
-                        if (res == currentPlayer.getId()) {
-                            return r;
+                        winner = checkColonne(i, j);
+                        if (winner != 0) {
+                            return winner;
                         }
 
                     }
                     if (i < this.game.getWidth() - 3 && j < this.game.getHeight() - 3) {
-                        res = checkDiagonal(i, j);
-                        if (res == currentPlayer.getId()) {
-                            return r;
+                        winner = checkDiagonal(i, j);
+                        if (winner != 0) {
+                            return winner;
                         }
                     }
                     if (i > 2 && j <= this.game.getHeight() - 3) {
 
-                        res = checkDiagonalBw(i, j);
-                        if (res == currentPlayer.getId()) {
-                            return r;
+                        winner = checkDiagonalBw(i, j);
+                        if (winner != 0) {
+                            return winner;
                         }
                     }
                 }
             }
         }
-        return r;
+        return winner;
+    }
+
+    public boolean isDone() {
+        boolean done = true;
+        for (int i = 0; i < this.game.getWidth(); i++) {
+            if (colState[i] < this.game.getHeight()) {
+                done = false;
+            }
+        }
+
+        return done || this.hasWon() != 0;
     }
 
     /**
@@ -173,36 +185,39 @@ public class State {
     }
 
     /**
-     * Function playing a move and returning the next state, aswell as updating currentState in the game to the next state
+     * Function playing a move and returning the next state, aswell as updating
+     * currentState in the game to the next state
+     * 
      * @param move the move to play
      * @return the next state
      * @throws UnknownError if move is invalid
      */
-    public State play(int move) throws UnknownError{
+    public State play(int move) throws UnknownError {
         return this.play(move, true);
     }
 
     /**
      * Function playing a move and returning the next state
-     * @param move the move to play
+     * 
+     * @param move       the move to play
      * @param updateGame true if updates the game currentState, false otherwise
      * @return the next state
      * @throws UnknownError if move is invalid
      */
     public State play(int move, boolean updateGame) throws UnknownError {
-        ArrayList<Integer> plays= this.getValidPlay();
+        ArrayList<Integer> plays = this.getValidPlay();
         if (!plays.contains(move)) {
             System.out.println("gros naze");
             throw new UnknownError("move non valide");
         } else {
-            //System.out.println(move);
-            //System.out.println(colState[move]);
+            // System.out.println(move);
+            // System.out.println(colState[move]);
 
-            int gWidth= this.game.getWidth();
-            int gHeight= this.game.getHeight();
-        
+            int gWidth = this.game.getWidth();
+            int gHeight = this.game.getHeight();
+
             // DeepCopy grille en premier
-            int[][] newGrille= new int[gWidth][gHeight];
+            int[][] newGrille = new int[gWidth][gHeight];
             for (int i = 0; i < gWidth; i++) {
                 for (int j = 0; j < gHeight; j++) {
                     newGrille[i][j] = this.grille[i][j];
@@ -210,20 +225,25 @@ public class State {
             }
 
             // Applique le coup sur la nouvelle grille
-            newGrille[gHeight-2 - colState[move]][move] = currentPlayer.getId(); /** TODO: Fix this, seems broken */
+            // le coup est joué en width "move", à l'index colState[move] de la colonne
+            // height correspondante
+            newGrille[move][colState[move]] = currentPlayer.getId();
 
-            //DeepCopy colState
-            int[] newColState= new int[gWidth];
-            for(int i =0; i<gWidth; i++){
-                newColState[i]=colState[i];
+            // DeepCopy colState
+            int[] newColState = new int[gWidth];
+            for (int i = 0; i < gWidth; i++) {
+                newColState[i] = colState[i];
             }
 
-            //Update le nouveau colState
+            // Update le nouveau colState
             newColState[move] += 1;
 
-            // Retourne un nouveau state correspondant au State courant après avoir effectué le coup
-            State nextState= new State(newGrille, newColState, this.game, this.getNextPlayer());
-            if(updateGame) this.game.updateState(nextState);
+            // Retourne un nouveau state correspondant au State courant après avoir effectué
+            // le coup
+            State nextState = new State(newGrille, newColState, this.game, this.getNextPlayer());
+            // Update l'état du game si demandé
+            if (updateGame)
+                this.game.updateState(nextState);
             return nextState;
         }
     }
@@ -250,7 +270,72 @@ public class State {
 
     /** UTILS **/
 
-    public void printState() {
-        System.out.println(Arrays.deepToString(grille).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+    // old and wrong
+    /*
+     * public void printState() {
+     * System.out.println(Arrays.deepToString(grille).replace("], ",
+     * "]\n").replace("[[", "[").replace("]]", "]"));
+     * }
+     */
+    
+    /**
+     * Print the state of the grid in a way that connect4 looks like
+     */
+    public void printStateClean() {
+        // Go through the height in reverse, to have lowest (first indexes of height) on
+        // bottom
+        for (int i = this.game.getHeight() - 1; i >= 0; i--) {
+            System.out.print("[");
+            // Go through width in the right order
+            for (int j = 0; j < this.game.getWidth(); j++) {
+                System.out.print(this.grille[j][i] + (j != this.game.getWidth() - 1 ? "," : ""));
+            }
+            System.out.println("]");
+        }
     }
+
+    /**
+     * Print the grid as raw lists
+     */
+    public void printRawState() {
+        for (int i = 0; i < this.game.getWidth(); i++) {
+            System.out.println(Arrays.toString(this.grille[i]));
+        }
+    }
+
+    /**
+     * Print column states
+     */
+    public void printColState() {
+        System.out.println(Arrays.toString(colState));
+    }
+
+    /**
+     * Print current player
+     */
+    public void printCurrentPlayer() {
+        System.out.println(this.currentPlayer);
+    }
+
+    /**
+     * Print winner
+     */
+    public void printWinner() {
+        System.out.println(this.hasWon());
+    }
+
+    /**
+     * Print the state of the game with all informations
+     */
+    public void printStateFull() {
+        System.out.print("Current player: ");
+        this.printCurrentPlayer();
+        System.out.println("Grille:");
+        this.printStateClean();
+        System.out.println("Column states:");
+        this.printColState();
+        System.out.print("Winner: ");
+        this.printWinner();
+    }
+
 }
