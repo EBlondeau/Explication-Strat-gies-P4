@@ -7,16 +7,13 @@ public class Main {
 
         Game game= new Game();
 
-        game.getCurrentState().printState();
+        while(!game.getCurrentState().isDone()){
+            game.getCurrentState().printStateFull();
+            int move= game.getCurrentState().getCurrentPlayer().play();
+            System.out.println("Played move:" + move);
+            game.getCurrentState().play(move);
+        }
 
-        /*while(!game.getCurrentState().hasWon()){
-            game.getCurrentState().getCurrentPlayer().play();
-            game.getCurrentState().printState();
-        }*/
-
-        game.getCurrentState().play(1);
-        game.getCurrentState().printState();
-
-
+        game.getCurrentState().printStateFull();
     }
 }
