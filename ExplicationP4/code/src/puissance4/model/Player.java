@@ -12,8 +12,8 @@ public class Player {
         this.strategy = strategy;
     }
 
-    public void play(){
-        this.strategy.playStrategy(game.getCurrentState());
+    public int play(){
+        return this.strategy.playStrategy(game.getCurrentState());
     }
 
     public int getId(){
@@ -26,5 +26,10 @@ public class Player {
 
     public void setGame(Game game){
         this.game= game;
+    }
+
+    @Override
+    public String toString(){
+        return ("pID: " + this.id + " strat: " + this.strategy.getClass().getSimpleName());  
     }
 }
