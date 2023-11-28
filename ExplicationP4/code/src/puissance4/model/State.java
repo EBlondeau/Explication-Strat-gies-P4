@@ -168,6 +168,24 @@ public class State {
     }
 
     /**
+     * Returns wether a move is a winning move
+     * @param move the move
+     * @return true if the current player wins by playing the move so, false otherwise
+     */
+    public boolean isWinningMove(int move){
+        State played= this.play(move, false);
+        return played.hasWon()==this.currentPlayer.getId();
+    }
+
+    public int nbMoves(){
+        int res=0;
+        for(int i=0; i<colState.length; i++){
+            res+=colState[i];
+        }
+        return res;
+    }
+
+    /**
      * renvoie une liste de taille this.game.getWidth() indiquant l'etat jouable ou
      * non des
      * colonnes
@@ -334,6 +352,7 @@ public class State {
         this.printStateClean();
         System.out.println("Column states:");
         this.printColState();
+        System.out.println(this.nbMoves());
         System.out.print("Winner: ");
         this.printWinner();
     }
