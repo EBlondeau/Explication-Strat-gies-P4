@@ -46,6 +46,12 @@ target name="cleanExp" >
 	</java>
 </target>
 
+<target name="runSmall" description="execution" depends="compile">
+	<java classname="puissance4.model.DemoSmallGrid" fork="true">
+		<classpath refid="projet.classpath"/>
+	</java>
+</target>
+
 
 <target name="javadoc">
 	<javadoc sourcepath="src" destdir="doc" encoding="utf8">
