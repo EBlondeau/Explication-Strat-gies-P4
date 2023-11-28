@@ -17,7 +17,7 @@ public class Negamax extends AbstractAlgo {
             // System.out.println("MOVE AAA: " + move);
             if (state.isWinningMove(move)) {
                 //System.out.println(gWidth * gHeight + 1 - state.nbMoves() / 2);
-                return gWidth * gHeight + 1 - state.nbMoves() / 2;
+                return (gWidth * gHeight) + 1 - state.nbMoves() / 2;
             }
         }
 
