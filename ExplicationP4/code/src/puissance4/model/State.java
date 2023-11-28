@@ -143,8 +143,8 @@ public class State {
                             return winner;
                         }
                     }
-                    if (i > 2 && j <= this.game.getHeight() - 3) {
-
+                    if (i > 2 && j < this.game.getHeight() - 3) {
+                        //System.out.println(i + "," + j);
                         winner = checkDiagonalBw(i, j);
                         if (winner != 0) {
                             return winner;
@@ -163,7 +163,6 @@ public class State {
                 done = false;
             }
         }
-
         return done || this.hasWon() != 0;
     }
 

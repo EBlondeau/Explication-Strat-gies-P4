@@ -6,6 +6,19 @@ import puissance4.model.State;
 
 public class Negamax {
 
+    public int getBestMove(State state){
+        int[] scores= this.getAllScore(state);
+        int max=0;
+        int index=-1;
+        for(int i=0; i<scores.length; i++){
+            if(scores[i]>max){
+                max= scores[i];
+                index=i;
+            } 
+        }
+        return index;
+    }
+
     public int[] getAllScore(State state){
         ArrayList<Integer> validPlays= state.getValidPlay();
         int[] res= new int[state.getGame().getWidth()];
@@ -31,8 +44,8 @@ public class Negamax {
         if(state.isDone()){
             return 0;
         }
-
         for(int move:state.getValidPlay()){
+            //System.out.println("MOVE AAA: " + move);
             if(state.isWinningMove(move)){
                 return gWidth*gHeight+1 -state.nbMoves()/2;
             }
