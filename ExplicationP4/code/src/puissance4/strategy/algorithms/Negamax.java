@@ -6,7 +6,7 @@ import puissance4.model.State;
 
 public class Negamax {
     private int depth;
-    public static final int DEFAULT_DEPTH = 4;
+    public static final int DEFAULT_DEPTH = 10;
 
     public Negamax(int depth) {
         this.depth = depth;
@@ -35,8 +35,11 @@ public class Negamax {
         for (int i = 0; i < state.getGame().getWidth(); i++) {
             if (validPlays.contains(i)) {
                 res[i] = this.getScore(state, i);
-            } else
+            } 
+            else{
                 res[i] = 0;
+            }
+                
         }
 
         return res;
@@ -44,28 +47,30 @@ public class Negamax {
 
     public int getScore(State state, int move) {
         State nextState = state.play(move, false);
-        return this.negamax(nextState, this.depth);
+        return -this.negamax(nextState, this.depth);
     }
 
     public int negamax(State state, int depth) {
         int gWidth = state.getGame().getWidth();
         int gHeight = state.getGame().getHeight();
         // Check for a draw
-        if (state.isDone() || depth == 0) {
+        if (state.isFull() || depth == 0) {
             return 0;
         }
         for (int move : state.getValidPlay()) {
             // System.out.println("MOVE AAA: " + move);
             if (state.isWinningMove(move)) {
+                //System.out.println(gWidth * gHeight + 1 - state.nbMoves() / 2);
                 return gWidth * gHeight + 1 - state.nbMoves() / 2;
             }
         }
 
         int bestScore = -(gWidth * gHeight);
-
+        //System.out.println(bestScore);
         for (int move : state.getValidPlay()) {
             State nextState = state.play(move, false);
-            int score = -(negamax(nextState, depth - 1));
+            int score = -negamax(nextState, depth - 1);
+            //System.out.print(score<0 ? score : "");
             if (score > bestScore)
                 bestScore = score;
         }
