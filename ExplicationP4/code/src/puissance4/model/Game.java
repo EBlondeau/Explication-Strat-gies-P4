@@ -50,7 +50,7 @@ public class Game {
      * @param width la largeur de la grille
      */
     public Game(Player player1, Player player2, int height, int width){
-        this(player1, player2, DEFAULT_HEIGHT, DEFAULT_WIDTH, null);
+        this(player1, player2, height, width, null);
         this.currentState = new State(this);
     }
 
