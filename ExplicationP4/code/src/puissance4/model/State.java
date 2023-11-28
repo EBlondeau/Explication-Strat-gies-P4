@@ -157,13 +157,17 @@ public class State {
     }
 
     public boolean isDone() {
-        boolean done = true;
+        return this.isFull() || this.hasWon() != 0;
+    }
+
+    public boolean isFull(){
+        boolean full = true;
         for (int i = 0; i < this.game.getWidth(); i++) {
             if (colState[i] < this.game.getHeight()) {
-                done = false;
+                full = false;
             }
         }
-        return done || this.hasWon() != 0;
+        return full;
     }
 
     /**
