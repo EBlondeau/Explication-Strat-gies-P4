@@ -1,0 +1,59 @@
+package puissance4.strategy.algorithms;
+
+import puissance4.model.State;
+
+public class Alphabeta extends AbstractAlgo {
+    
+    public static final int alpha = -1000000;
+    public static final int beta = 1000000;  
+
+    public int negAlphabeta(State state, int depth, int alpha, int beta) {
+        int gWidth = state.getGame().getWidth();
+        int gHeight = state.getGame().getHeight();
+
+        // int winner=state.hasWon();
+        // if(winner!=0){
+        //     //System.out.println(state.nbMoves());
+        //     return -((gWidth * gHeight)+1 - state.nbMoves())/ 2; 
+        // }
+
+        // Check for a draw
+        if (state.isFull() || depth == 0) {
+            //System.out.println(state.isFull());
+            return 0;
+        }
+
+        for (int move : state.getValidPlay()) {
+            // System.out.println("MOVE AAA: " + move);
+            if (state.isWinningMove(move)) {
+                //System.out.println(gWidth * gHeight + 1 - state.nbMoves() / 2);
+                return (gWidth * gHeight + 1 - state.nbMoves()) / 2;
+            }
+        }
+
+        int max = ((gWidth * gHeight)-1 - state.nbMoves())/ 2;
+        if(beta>max ){
+            beta=max;
+            if(alpha>=beta) return beta;
+        }
+
+        int value= -1000000;
+
+        //System.out.println(bestScore);
+        for (int move : state.getValidPlay()) {
+            State nextState = state.play(move, false);
+            int score = Math.max(value, -negAlphabeta(nextState, depth - 1, -beta, -alpha));
+            //System.out.print(score<0 ? score : "");
+            if (score >=beta) return score;
+            if (score > alpha) alpha=score;
+        }
+
+        return alpha;
+    }
+
+    @Override
+    public int algorithm(State state, int depth) {
+        return this.negAlphabeta(state, depth, alpha, beta);
+    }
+    
+}
