@@ -7,7 +7,7 @@ import puissance4.model.State;
 public abstract class AbstractAlgo {
 
     private int depth;
-    public static final int DEFAULT_DEPTH = 10;
+    public static final int DEFAULT_DEPTH = 25;
 
     public AbstractAlgo(int depth) {
         this.depth = depth;
@@ -40,7 +40,7 @@ public abstract class AbstractAlgo {
                 res[i] = this.getScore(state, i);
             } 
             else{
-                res[i] = 0;
+                res[i] = -100000;
             }
                 
         }
