@@ -59,14 +59,17 @@ public class State {
         this.grille = grille;
     }
 
-    public int checkLigne(int i, int j) {
+    public int checkLigne(int i, int j, int length) {
         int c = grille[i][j];
 
         if (c != 0) {
-            if (c == grille[i][j + 1] && c == grille[i][j + 2]
-                    && c == grille[i][j + 3]) {
-                return grille[i][j];
+            for (int k = 0; k < length; k++) {
+                if (grille[i][j] != grille[i + k][j]) {
+                    return 0;
+                }
             }
+            return grille[i][j];
+
         }
 
         return 0;
@@ -79,74 +82,97 @@ public class State {
      * 
      * @return playerID du gagnant
      */
-    public int checkColonne(int i, int j) {
+    public int checkColonne(int i, int j, int length) {
         int c = grille[i][j];
 
         if (c != 0) {
-            if (c == grille[i + 1][j] && c == grille[i + 2][j]
-                    && c == grille[i + 3][j]) {
-                return grille[i][j];
+            for (int k = 0; k < length; k++) {
+                if (grille[i][j] != grille[i][j + k]) {
+                    return 0;
+                }
             }
+            return grille[i][j];
+
         }
 
         return 0;
     }
 
-    public int checkDiagonal(int i, int j) {
+    public int checkDiagonal(int i, int j, int length) {
         int c = grille[i][j];
 
         if (c != 0) {
-            if (c == grille[i + 1][j + 1] && c == grille[i + 2][j + 2]
-                    && c == grille[i + 3][j + 3]) {
-                return grille[i][j];
+            for (int k = 0; k < length; k++) {
+                if (grille[i][j] != grille[i + k][j + k]) {
+                    return 0;
+                }
             }
+            return grille[i][j];
+
         }
 
         return 0;
     }
 
-    public int checkDiagonalBw(int i, int j) {
+    public int checkDiagonalBw(int i, int j, int length) {
 
         int c = grille[i][j];
 
         if (c != 0) {
-            if (c == grille[i - 1][j + 1] && c == grille[i - 2][j + 2]
-                    && c == grille[i - 3][j + 3]) {
-                return grille[i][j];
+            for (int k = 0; k < length; k++) {
+                if (grille[i][j] != grille[i - k][j + k]) {
+                    return 0;
+                }
             }
+            return grille[i][j];
+
         }
+
         return 0;
     }
 
     public int hasWon() {
         int winner = 0;
+        int l = this.game.getWinningLength();
+        int k = l - 1;
+
         for (int i = 0; i < this.game.getWidth(); i++) {
             for (int j = 0; j < this.game.getHeight(); j++) {
 
                 if (grille[i][j] != 0) {
-                    if (j < this.game.getHeight() - 3) {
-                        winner = checkLigne(i, j);
+                    if (j < this.game.getHeight() - k) {
+                        winner = checkColonne(i, j, l);
+
                         if (winner != 0) {
+                            System.out.println("col");
+
                             return winner;
                         }
                     }
-                    if (i < this.game.getWidth() - 3) {
-                        winner = checkColonne(i, j);
+                    if (i < this.game.getWidth() - k) {
+                        winner = checkLigne(i, j, l);
+
                         if (winner != 0) {
+                            System.out.println("ligne");
+
                             return winner;
                         }
 
                     }
-                    if (i < this.game.getWidth() - 3 && j < this.game.getHeight() - 3) {
-                        winner = checkDiagonal(i, j);
+                    if (i < this.game.getWidth() - k && j < this.game.getHeight() - k) {
+                        winner = checkDiagonal(i, j, l);
                         if (winner != 0) {
+                            System.out.println("diagonal");
+
                             return winner;
                         }
                     }
-                    if (i > 2 && j < this.game.getHeight() - 3) {
-                        //System.out.println(i + "," + j);
-                        winner = checkDiagonalBw(i, j);
+                    if (i >= k && j < this.game.getHeight() - k) {
+                        // System.out.println(i + "," + j);
+                        winner = checkDiagonalBw(i, j, l);
                         if (winner != 0) {
+                            System.out.println("diagonalBW");
+
                             return winner;
                         }
                     }
@@ -160,7 +186,7 @@ public class State {
         return this.isFull() || this.hasWon() != 0;
     }
 
-    public boolean isFull(){
+    public boolean isFull() {
         boolean full = true;
         for (int i = 0; i < this.game.getWidth(); i++) {
             if (colState[i] < this.game.getHeight()) {
@@ -172,18 +198,20 @@ public class State {
 
     /**
      * Returns wether a move is a winning move
+     * 
      * @param move the move
-     * @return true if the current player wins by playing the move so, false otherwise
+     * @return true if the current player wins by playing the move so, false
+     *         otherwise
      */
-    public boolean isWinningMove(int move){
-        State played= this.play(move, false);
-        return played.hasWon()==this.currentPlayer.getId();
+    public boolean isWinningMove(int move) {
+        State played = this.play(move, false);
+        return played.hasWon() == this.currentPlayer.getId();
     }
 
-    public int nbMoves(){
-        int res=0;
-        for(int i=0; i<colState.length; i++){
-            res+=colState[i];
+    public int nbMoves() {
+        int res = 0;
+        for (int i = 0; i < colState.length; i++) {
+            res += colState[i];
         }
         return res;
     }
@@ -298,7 +326,7 @@ public class State {
      * "]\n").replace("[[", "[").replace("]]", "]"));
      * }
      */
-    
+
     /**
      * Print the state of the grid in a way that connect4 looks like
      */

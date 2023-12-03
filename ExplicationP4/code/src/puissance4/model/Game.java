@@ -5,8 +5,9 @@ import puissance4.strategy.RandomStrategy;
 
 public class Game {
 
-    public static final int DEFAULT_HEIGHT=6;
-    public static final int DEFAULT_WIDTH=7;
+    public static final int DEFAULT_HEIGHT = 6;
+    public static final int DEFAULT_WIDTH = 7;
+    public static final int DEFAULT_WINNINGLENGTH = 2;
 
     private int height;
     private int width;
@@ -14,7 +15,7 @@ public class Game {
     private Player player2;
     private State currentState;
     private static final IStrategy DEFAULT_STRATEGY = new RandomStrategy();
-
+    private int winningLength;
 
     /**
      * Constructeur par défaut d'une partie
@@ -25,6 +26,7 @@ public class Game {
 
     /**
      * Constructeur d'une partie avec des joueurs définis, à l'état de base
+     * 
      * @param p1 le joueur 1 (rouge)
      * @param p2 le joueur 2 (jaune)
      */
@@ -34,8 +36,9 @@ public class Game {
 
     /**
      * Constructeur d'une partie avec des joueurs définis et un état défini
-     * @param player1 le joueur 1 (rouge)
-     * @param player2 le joueur 2 (jaune)
+     * 
+     * @param player1      le joueur 1 (rouge)
+     * @param player2      le joueur 2 (jaune)
      * @param currentState l'état prédifini
      */
     public Game(Player player1, Player player2, State currentState) {
@@ -43,33 +46,49 @@ public class Game {
     }
 
     /**
-     * Constructeur d'une partie avec des joueurs et une taille définie, à l'état initial
+     * Constructeur d'une partie avec des joueurs et une taille définie, à l'état
+     * initial
+     * 
      * @param player1 le joueur 1 (rouge)
      * @param player2 le joueur 2 (jaune)
-     * @param height la hauteur de la grille
-     * @param width la largeur de la grille
+     * @param height  la hauteur de la grille
+     * @param width   la largeur de la grille
      */
-    public Game(Player player1, Player player2, int height, int width){
+    public Game(Player player1, Player player2, int height, int width) {
         this(player1, player2, height, width, null);
         this.currentState = new State(this);
     }
 
     /**
      * Constructeur complet d'une partie
+     * 
      * @param player1
      * @param player2
      * @param height
      * @param width
      * @param currentState
      */
-    public Game(Player player1, Player player2, int height, int width, State currentState){
-        this.width=width;
-        this.height=height;
+    public Game(Player player1, Player player2, int height, int width, State currentState) {
+        this.width = width;
+        this.height = height;
         this.player1 = player1;
         this.player2 = player2;
         this.currentState = currentState;
+        this.winningLength = DEFAULT_WINNINGLENGTH;
         this.player1.setGame(this);
         this.player2.setGame(this);
+    }
+
+    public Game(Player player1, Player player2, int height, int width, State currentState, int winningLength) {
+        this.width = width;
+        this.height = height;
+        this.player1 = player1;
+        this.player2 = player2;
+        this.currentState = currentState;
+        this.winningLength = winningLength;
+        this.player1.setGame(this);
+        this.player2.setGame(this);
+
     }
 
     /*
@@ -89,11 +108,11 @@ public class Game {
         return this.player2;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this.height;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return this.width;
     }
 
@@ -101,8 +120,12 @@ public class Game {
         return this.currentState;
     }
 
-    public void updateState(State state){
-        this.currentState=state;
+    public void updateState(State state) {
+        this.currentState = state;
+    }
+
+    public int getWinningLength() {
+        return this.winningLength;
     }
 
 }
