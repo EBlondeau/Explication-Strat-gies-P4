@@ -15,7 +15,7 @@ public class DemoSmallGrid {
 
         Game game = new Game(new Player(1, new UserInputStrategy()), new Player(2, new UserInputStrategy()), 3, 3);
         // AbstractAlgo nega= new Negamax();
-        // AbstractAlgo alpha= new Alphabeta();
+        AbstractAlgo alpha = new Alphabeta();
         // String scores= new ArrayList
         // int score= nega.getScore(game.getCurrentState(), 0);
 
@@ -25,8 +25,9 @@ public class DemoSmallGrid {
             System.out.println("Played move:" + move);
             game.getCurrentState().play(move);
             // String scores= Arrays.toString(nega.getAllScore(game.getCurrentState()));
-            // String scores = Arrays.toString(alpha.getAllScore(game.getCurrentState()));
+            String scores = Arrays.toString(alpha.getAllScore(game.getCurrentState()));
             System.out.println(game.getCurrentState().hasWon());
+            System.out.println(scores);
 
         }
 

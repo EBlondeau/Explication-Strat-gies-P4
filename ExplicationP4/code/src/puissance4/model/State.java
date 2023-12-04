@@ -144,7 +144,6 @@ public class State {
                         winner = checkColonne(i, j, l);
 
                         if (winner != 0) {
-                            System.out.println("col");
 
                             return winner;
                         }
@@ -153,7 +152,6 @@ public class State {
                         winner = checkLigne(i, j, l);
 
                         if (winner != 0) {
-                            System.out.println("ligne");
 
                             return winner;
                         }
@@ -162,16 +160,13 @@ public class State {
                     if (i < this.game.getWidth() - k && j < this.game.getHeight() - k) {
                         winner = checkDiagonal(i, j, l);
                         if (winner != 0) {
-                            System.out.println("diagonal");
 
                             return winner;
                         }
                     }
                     if (i >= k && j < this.game.getHeight() - k) {
-                        // System.out.println(i + "," + j);
                         winner = checkDiagonalBw(i, j, l);
                         if (winner != 0) {
-                            System.out.println("diagonalBW");
 
                             return winner;
                         }
