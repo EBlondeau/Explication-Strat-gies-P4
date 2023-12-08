@@ -7,7 +7,7 @@ public class Game {
 
     public static final int DEFAULT_HEIGHT = 6;
     public static final int DEFAULT_WIDTH = 7;
-    public static final int DEFAULT_WINNINGLENGTH = 2;
+    public static final int DEFAULT_WINNINGLENGTH = 3;
 
     private int height;
     private int width;

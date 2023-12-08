@@ -21,7 +21,7 @@ public abstract class AbstractAlgo {
 
     public int getBestMove(State state) {
         int[] scores = this.getAllScore(state);
-        int max = -(state.getGame().getWidth()*state.getGame().getHeight());
+        int max = -(state.getGame().getWidth() * state.getGame().getHeight());
         int index = -1;
         for (int i = 0; i < scores.length; i++) {
             if (scores[i] > max) {
@@ -38,11 +38,10 @@ public abstract class AbstractAlgo {
         for (int i = 0; i < state.getGame().getWidth(); i++) {
             if (validPlays.contains(i)) {
                 res[i] = this.getScore(state, i);
-            } 
-            else{
+            } else {
                 res[i] = -100000;
             }
-                
+
         }
 
         return res;
