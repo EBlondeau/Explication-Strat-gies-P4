@@ -1,5 +1,7 @@
 package puissance4.model;
 
+import java.util.Arrays;
+
 import puissance4.strategy.IStrategy;
 import puissance4.strategy.RandomStrategy;
 
@@ -88,7 +90,22 @@ public class Game {
         this.winningLength = winningLength;
         this.player1.setGame(this);
         this.player2.setGame(this);
+    }
 
+    public Game(String serializedGame){
+        this.player1= new Player(1, DEFAULT_STRATEGY);
+        this.player2 = new Player(2, DEFAULT_STRATEGY);
+        this.player1.setGame(this);
+        this.player2.setGame(this);
+
+        String[] attributes = serializedGame.split(" ");
+        System.out.println(Arrays.toString(attributes));
+        this.width= Integer.parseInt(attributes[1]);
+        this.height= Integer.parseInt(attributes[2]);
+        this.winningLength= Integer.parseInt(attributes[3]);
+        this.currentState= new State(attributes[0], this);
+        
+       
     }
 
     /*

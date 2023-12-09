@@ -59,6 +59,31 @@ public class State {
         this.grille = grille;
     }
 
+
+    /**
+     * Constructor for a state with serialized data
+     * inputs all the move from a string passed in argument
+     * Expects the string to be a valid sequence of moves
+     * @param moves the sequence of move
+     * @param game the game associated
+     */
+    public State(String moves, Game game){
+        this.game=game;
+        this.currentPlayer=this.game.getp1();
+        String[] splitMoves=moves.split("");
+        System.out.println(Arrays.toString(splitMoves));
+        this.grille = new int[this.game.getWidth()][this.game.getHeight()];
+        this.colState = new int[this.game.getWidth()];
+        //Inputs all the moves in the state
+        for(int i=0; i< splitMoves.length; i++){
+            int move = Integer.parseInt(splitMoves[i]);
+            System.out.println(move);
+            this.grille[move][colState[move]]=this.currentPlayer.getId();
+            this.colState[move]+=1;
+            this.currentPlayer=this.getNextPlayer();
+        }
+    }
+
     public int checkLigne(int i, int j, int length) {
         int c = grille[i][j];
 
