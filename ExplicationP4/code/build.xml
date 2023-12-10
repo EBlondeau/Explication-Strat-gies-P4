@@ -4,6 +4,8 @@
 <property name="projet.sources.dir" value="src"/>
 <property name="projet.bin.dir" value="bin/"/>
 <property name="projet.doc.dir" value="doc"/>
+<property name="project.exp.dir" value="../data/exp"/>
+<property name="project.testsets.dir" value="../data/testsets"/>
 
 
 <path id="projet.classpath">
@@ -18,6 +20,8 @@
 
 <target name="prepare" description="prepare le projet" depends="clean">
 	<mkdir dir="${projet.bin.dir}" />
+	<mkdir dir="${project.exp.dir}"/>
+	<mkdir dir="${project.testsets.dir}"/>
 </target>
 
 <target name="clean">
@@ -28,15 +32,15 @@
   </delete>
 </target>
 
-<!-- ()
-target name="cleanExp" >
+
+<target name="cleanExp" >
   <echo>=== CLEAN ===</echo>
   <delete includeEmptyDirs="true">
-    <fileset dir="${projet.rTables.dir}" includes="**/*"/>
-	<fileset dir="${projet.exp.dir}" includes="**/*"/>
+    <fileset dir="${project.testsets.dir}" includes="**/*"/>
+	<fileset dir="${project.exp.dir}" includes="**/*"/>
   </delete>
 </target> 
--->
+
 
 
 
@@ -48,6 +52,12 @@ target name="cleanExp" >
 
 <target name="runSmall" description="execution" depends="compile">
 	<java classname="puissance4.model.DemoSmallGrid" fork="true">
+		<classpath refid="projet.classpath"/>
+	</java>
+</target>
+
+<target name="runSetGen" description="execution" depends="compile">
+	<java classname="puissance4.model.DemoSerializedData" fork="true">
 		<classpath refid="projet.classpath"/>
 	</java>
 </target>
