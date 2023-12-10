@@ -145,4 +145,8 @@ public class Game {
         return this.winningLength;
     }
 
+    public void setWinningLength(int winningLength){
+        this.winningLength=winningLength;
+    }
+
 }
