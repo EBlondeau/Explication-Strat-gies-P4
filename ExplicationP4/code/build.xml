@@ -62,6 +62,12 @@
 	</java>
 </target>
 
+<target name="runGUI" description="execution" depends="compile">
+	<java classname="puissance4.view.game.GameDemo" fork="true">
+		<classpath refid="projet.classpath"/>
+	</java>
+</target>
+
 
 <target name="javadoc">
 	<javadoc sourcepath="src" destdir="doc" encoding="utf8">

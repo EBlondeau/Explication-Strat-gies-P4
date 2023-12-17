@@ -4,10 +4,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import util.observer.AbstractListenableModel;
+
 /*
  * Interface représentant un état d'un jeu
  */
-public class State {
+public class State extends AbstractListenableModel{
 
     private int[][] grille;
     private Game game;
@@ -313,6 +315,7 @@ public class State {
             // Update l'état du game si demandé
             if (updateGame)
                 this.game.updateState(nextState);
+            fireChange();
             return nextState;
         }
     }

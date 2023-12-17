@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 import puissance4.strategy.IStrategy;
 import puissance4.strategy.RandomStrategy;
+import util.observer.AbstractListenableModel;
 
-public class Game {
+public class Game extends AbstractListenableModel {
 
     public static final int DEFAULT_HEIGHT = 6;
     public static final int DEFAULT_WIDTH = 7;
-    public static final int DEFAULT_WINNINGLENGTH = 3;
+    public static final int DEFAULT_WINNINGLENGTH = 4;
 
     private int height;
     private int width;
@@ -98,7 +99,7 @@ public class Game {
         this.player1.setGame(this);
         this.player2.setGame(this);
 
-        String[] attributes = serializedGame.split(" ");
+        String[] attributes = serializedGame.split("_");
         System.out.println(Arrays.toString(attributes));
         this.width= Integer.parseInt(attributes[1]);
         this.height= Integer.parseInt(attributes[2]);
@@ -139,6 +140,7 @@ public class Game {
 
     public void updateState(State state) {
         this.currentState = state;
+        fireChange();
     }
 
     public int getWinningLength() {

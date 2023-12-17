@@ -55,7 +55,7 @@ public final class StateGenerator {
 
         //System.out.println(state.hasWon());
 
-        return moveList;
+        return moveList+"_"+width+"_"+height+"_"+winningLength;
     }
 
 
