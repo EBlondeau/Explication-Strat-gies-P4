@@ -108,12 +108,12 @@ public final class StateGenerator {
             // Set attributes
             String[] setAttributes= line.split("_");
             String setName=setAttributes[0];
-            int setSeed=-1;
+            long setSeed=-1;
             if(setAttributes.length==2){
-                setSeed=Integer.parseInt(setAttributes[1]);
+                setSeed=Long.parseLong(setAttributes[1]);
             }
             else{
-                setSeed=initR.nextInt();
+                setSeed=initR.nextLong();
             }
 
             Random r = new Random(setSeed);

@@ -68,6 +68,12 @@
 	</java>
 </target>
 
+<target name="runExp" description="execution" depends="compile">
+	<java classname="puissance4.exp.Main" fork="true">
+		<classpath refid="projet.classpath"/>
+	</java>
+</target>
+
 
 <target name="javadoc">
 	<javadoc sourcepath="src" destdir="doc" encoding="utf8">

@@ -100,7 +100,6 @@ public class Game extends AbstractListenableModel {
         this.player2.setGame(this);
 
         String[] attributes = serializedGame.split("_");
-        System.out.println(Arrays.toString(attributes));
         this.width= Integer.parseInt(attributes[1]);
         this.height= Integer.parseInt(attributes[2]);
         this.winningLength= Integer.parseInt(attributes[3]);
