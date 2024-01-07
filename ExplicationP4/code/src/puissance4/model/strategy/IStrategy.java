@@ -1,4 +1,4 @@
-package puissance4.strategy;
+package puissance4.model.strategy;
 
 import puissance4.model.Player;
 import puissance4.model.State;

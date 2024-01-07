@@ -2,8 +2,8 @@ package puissance4.model;
 
 import java.util.Arrays;
 
-import puissance4.strategy.RandomStrategy;
-import puissance4.strategy.UserInputStrategy;
+import puissance4.model.strategy.RandomStrategy;
+import puissance4.model.strategy.UserInputStrategy;
 
 public class Main {
     public static void main(String[] args) {

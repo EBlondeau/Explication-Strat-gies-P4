@@ -2,8 +2,8 @@ package puissance4.model;
 
 import java.util.Arrays;
 
-import puissance4.strategy.IStrategy;
-import puissance4.strategy.RandomStrategy;
+import puissance4.model.strategy.IStrategy;
+import puissance4.model.strategy.RandomStrategy;
 import util.observer.AbstractListenableModel;
 
 public class Game extends AbstractListenableModel {

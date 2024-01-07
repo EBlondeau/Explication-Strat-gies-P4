@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import puissance4.strategy.NegamaxStrategy;
-import puissance4.strategy.RandomStrategy;
-import puissance4.strategy.UserInputStrategy;
-import puissance4.strategy.algorithms.AbstractAlgo;
-import puissance4.strategy.algorithms.Alphabeta;
-import puissance4.strategy.algorithms.Negamax;
+import puissance4.model.strategy.NegamaxStrategy;
+import puissance4.model.strategy.RandomStrategy;
+import puissance4.model.strategy.UserInputStrategy;
+import puissance4.model.strategy.algorithms.AbstractAlgo;
+import puissance4.model.strategy.algorithms.Alphabeta;
+import puissance4.model.strategy.algorithms.Negamax;
 
 public class DemoSmallGrid {
     public static void main(String[] args) {

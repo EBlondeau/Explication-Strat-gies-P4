@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import puissance4.model.Game;
 import puissance4.model.State;
-import puissance4.strategy.algorithms.AbstractAlgo;
+import puissance4.model.strategy.algorithms.AbstractAlgo;
 
 public class TestAlgo {
 

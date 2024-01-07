@@ -1,10 +1,10 @@
-package puissance4.strategy;
+package puissance4.model.strategy;
 
 import java.util.Scanner;
 
 import puissance4.model.State;
-import puissance4.strategy.algorithms.Alphabeta;
-import puissance4.strategy.algorithms.Negamax;
+import puissance4.model.strategy.algorithms.Alphabeta;
+import puissance4.model.strategy.algorithms.Negamax;
 
 public class NegamaxStrategy implements IStrategy {
 

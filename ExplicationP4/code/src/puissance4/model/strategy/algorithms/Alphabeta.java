@@ -1,4 +1,4 @@
-package puissance4.strategy.algorithms;
+package puissance4.model.strategy.algorithms;
 
 import puissance4.model.State;
 

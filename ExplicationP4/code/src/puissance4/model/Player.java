@@ -1,6 +1,6 @@
 package puissance4.model;
 
-import puissance4.strategy.IStrategy;
+import puissance4.model.strategy.IStrategy;
 
 public class Player {
     private IStrategy strategy;
