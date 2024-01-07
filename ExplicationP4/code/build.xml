@@ -51,13 +51,13 @@
 </target>
 
 <target name="runSmall" description="execution" depends="compile">
-	<java classname="puissance4.model.DemoSmallGrid" fork="true">
+	<java classname="puissance4.model.demos.DemoSmallGrid" fork="true">
 		<classpath refid="projet.classpath"/>
 	</java>
 </target>
 
 <target name="runSetGen" description="execution" depends="compile">
-	<java classname="puissance4.model.DemoSerializedData" fork="true">
+	<java classname="puissance4.model.demos.DemoSerializedData" fork="true">
 		<classpath refid="projet.classpath"/>
 	</java>
 </target>

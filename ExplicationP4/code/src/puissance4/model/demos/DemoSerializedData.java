@@ -1,6 +1,8 @@
-package puissance4.model;
+package puissance4.model.demos;
 
 import java.io.File;
+
+import puissance4.model.StateGenerator;
 
 public class DemoSerializedData {
     public static void main(String[] args) {

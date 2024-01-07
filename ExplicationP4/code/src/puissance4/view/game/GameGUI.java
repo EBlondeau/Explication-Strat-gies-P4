@@ -8,9 +8,9 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.nimbus.State;
 
 import puissance4.model.Game;
-import puissance4.view.game.state.AStateView;
-import puissance4.view.game.state.StateController;
-import puissance4.view.game.state.StateView;
+import puissance4.view.state.AStateView;
+import puissance4.view.state.StateController;
+import puissance4.view.state.StateView;
 import util.observer.ModelListener;
 
 public class GameGUI extends JFrame implements ModelListener, MouseInputListener{

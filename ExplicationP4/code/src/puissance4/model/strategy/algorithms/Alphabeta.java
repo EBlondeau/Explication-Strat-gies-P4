@@ -22,32 +22,15 @@ public class Alphabeta extends AbstractAlgo {
 
         // Check for a draw
         if (state.isFull() || depth == 0) {
-            // System.out.println(state.isFull());
             return 0;
         }
-        /*
-         * for (int move : state.getValidPlay()) {
-         * // System.out.println("MOVE AAA: " + move);
-         * if (state.isWinningMove(move)) {
-         * // System.out.println(gWidth * gHeight + 1 - state.nbMoves() / 2);
-         * return (gWidth * gHeight + 1 - state.nbMoves()) / 2;
-         * }
-         * }
-         * /*
-         * int max = ((gWidth * gHeight) - 1 - state.nbMoves()) / 2;
-         * if (beta > max) {
-         * beta = max;
-         * if (alpha >= beta)
-         * return beta;
-         * }
-         */
+
         int value = -1000000;
 
-        // System.out.println(bestScore);
         for (int move : state.getValidPlay()) {
             State nextState = state.play(move, false);
-            value = Math.max(value, -negAlphabeta(nextState, depth - 1, -beta, -alpha));
-            // System.out.print(score<0 ? score : "");
+            value = Math.max(value,
+             -negAlphabeta(nextState, depth - 1, -beta, -alpha));
             if (value >= beta)
                 return value;
             if (value > alpha)

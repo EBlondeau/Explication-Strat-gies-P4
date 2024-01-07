@@ -1,4 +1,4 @@
-package puissance4.view.game.state;
+package puissance4.view.state;
 
 import java.awt.event.MouseEvent;
 
