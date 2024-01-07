@@ -9,5 +9,6 @@ Pour executer le code:
 Autre commandes :
 
 -"ant runSetGen" -> execute DemoSerializedData.java
+-"ant runGUI"  -> execute GameDemo.java
 -"ant cleanExp" -> nettoie les répertoires data/exp et data/testsets
 
