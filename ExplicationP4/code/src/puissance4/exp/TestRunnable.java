@@ -3,6 +3,7 @@ package puissance4.exp;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.concurrent.Future;
@@ -16,10 +17,12 @@ public class TestRunnable implements Runnable {
 
     private AbstractAlgo algo;
     private File set;
+    private FileWriter setWriter;
 
-    public TestRunnable(AbstractAlgo algo, File set){
+    public TestRunnable(AbstractAlgo algo, File set, FileWriter setWriter){
         this.algo=algo;
         this.set=set;
+        this.setWriter=setWriter;
     }
 
     @Override
@@ -46,7 +49,9 @@ public class TestRunnable implements Runnable {
                 totalDelta+=delta;
                 lines++;
             }
-            System.out.println(totalDelta/lines);
+            double avg=totalDelta/lines;
+            System.out.println(avg);
+            setWriter.write(set.getName() + " " + avg + "\n");
             setReader.close();
         } catch (Exception e) {
             e.printStackTrace();
