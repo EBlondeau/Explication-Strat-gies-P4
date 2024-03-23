@@ -9,7 +9,7 @@ import util.observer.AbstractListenableModel;
 /*
  * Interface représentant un état d'un jeu
  */
-public class State extends AbstractListenableModel{
+public class State extends AbstractListenableModel {
 
     private int[][] grille;
     private Game game;
@@ -61,28 +61,28 @@ public class State extends AbstractListenableModel{
         this.grille = grille;
     }
 
-
     /**
      * Constructor for a state with serialized data
      * inputs all the move from a string passed in argument
      * Expects the string to be a valid sequence of moves
+     * 
      * @param moves the sequence of move
-     * @param game the game associated
+     * @param game  the game associated
      */
-    public State(String moves, Game game){
-        this.game=game;
-        this.currentPlayer=this.game.getp1();
-        String[] splitMoves=moves.split("");
-        //System.out.println(Arrays.toString(splitMoves));
+    public State(String moves, Game game) {
+        this.game = game;
+        this.currentPlayer = this.game.getp1();
+        String[] splitMoves = moves.split("");
+        // System.out.println(Arrays.toString(splitMoves));
         this.grille = new int[this.game.getWidth()][this.game.getHeight()];
         this.colState = new int[this.game.getWidth()];
-        //Inputs all the moves in the state
-        for(int i=0; i< splitMoves.length; i++){
+        // Inputs all the moves in the state
+        for (int i = 0; i < splitMoves.length; i++) {
             int move = Integer.parseInt(splitMoves[i]);
-            //System.out.println(move);
-            this.grille[move][colState[move]]=this.currentPlayer.getId();
-            this.colState[move]+=1;
-            this.currentPlayer=this.getNextPlayer();
+            // System.out.println(move);
+            this.grille[move][colState[move]] = this.currentPlayer.getId();
+            this.colState[move] += 1;
+            this.currentPlayer = this.getNextPlayer();
         }
     }
 
@@ -411,4 +411,24 @@ public class State extends AbstractListenableModel{
         this.printWinner();
     }
 
+    public int getStateKey() {
+        int gWidth = this.game.getWidth();
+        int gHeight = this.game.getHeight();
+        String temp = "";
+        // DeepCopy grille en premier
+        int[][] newGrille = new int[gWidth][gHeight];
+        for (int i = 0; i < gWidth; i++) {
+            for (int j = 0; j < gHeight; j++) {
+                if (this.grille[i][j] == 0) {
+                    temp += "00";
+                } else if (this.grille[i][j] == 1) {
+                    temp += "01";
+                } else if (this.grille[i][j] == 2) {
+                    temp += "11";
+                }
+            }
+        }
+        int key = Integer.parseInt(temp, 2);
+        return key;
+    }
 }
