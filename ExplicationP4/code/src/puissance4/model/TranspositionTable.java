@@ -2,26 +2,27 @@ package puissance4.model;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TranspositionTable {
     private static final int MAX_ENTRIES = 5;
-    public LinkedHashMap<Integer, Integer> table;
+    public LinkedHashMap<Integer, List<Integer>> table;
 
     public TranspositionTable() {
-        this.table = new LinkedHashMap<Integer, Integer>(MAX_ENTRIES, 0.75f, true) {
+        this.table = new LinkedHashMap<Integer, List<Integer>>(MAX_ENTRIES, 0.75f, true) {
             @Override
-            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+            protected boolean removeEldestEntry(Map.Entry<Integer, List<Integer>> eldest) {
                 return size() > MAX_ENTRIES;
             }
         };
     }
 
-    public void put(int key, int val) {
+    public void put(int key, List<Integer> val) {
         this.table.put(key, val);
     };
 
-    public Integer get(int key) {
+    public List<Integer> getVal(int key) {
         if (this.table.containsKey(key)) {
             return this.table.get(key);
         } else {
@@ -32,6 +33,19 @@ public class TranspositionTable {
 
     public int size() {
         return this.table.size();
+    }
+
+    public int getDepth(int key) {
+        return getVal(key).get(0);
+    }
+
+    public int getValue(int key) {
+        return getVal(key).get(1);
+
+    }
+
+    public int getFlag(int key) {
+        return getVal(key).get(2); // 0 = exact , -1 = Lower , 1 = Upper
     }
 
 }

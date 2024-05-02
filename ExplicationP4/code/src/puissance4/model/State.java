@@ -414,7 +414,7 @@ public class State extends AbstractListenableModel {
     public int getStateKey() {
         int gWidth = this.game.getWidth();
         int gHeight = this.game.getHeight();
-        String temp = "";
+        String temp = "1";
         // DeepCopy grille en premier
         int[][] newGrille = new int[gWidth][gHeight];
         for (int i = 0; i < gWidth; i++) {
@@ -430,5 +430,13 @@ public class State extends AbstractListenableModel {
         }
         int key = Integer.parseInt(temp, 2);
         return key;
+    }
+
+    public String keyToString() {
+
+        String res = Integer.toString(game.getCurrentState().getStateKey(), 2);
+        int remainingZeros = 84 - res.length();
+        res = "0".repeat(remainingZeros) + res;
+        return res;
     }
 }

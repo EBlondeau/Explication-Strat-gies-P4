@@ -22,18 +22,14 @@ public class Main {
          * game.getCurrentState().printStateFull();
          */
         TranspositionTable t = new TranspositionTable();
-        t.put(1, 1);
-        t.put(2, 1);
-        t.put(3, 1);
-        t.put(4, 1);
-        t.put(5, 1);
-        System.out.println(t.get(5));
-        t.put(6, 0);
-        System.out.println(t.get(2));
-        System.out.println(t.size());
-        t.put(7, 0);
-        System.out.println(t.get(14));
+
         System.out.println(t.size());
 
+        // int move = game.getCurrentState().getCurrentPlayer().play();
+        game.getCurrentState().play(2);
+        game.getCurrentState().play(2);
+        game.getCurrentState().play(2);
+        game.getCurrentState().play(2);
+        System.out.println(game.getCurrentState().keyToString());
     }
 }
