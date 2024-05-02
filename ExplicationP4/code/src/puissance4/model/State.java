@@ -1,6 +1,7 @@
 package puissance4.model;
 
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -411,7 +412,7 @@ public class State extends AbstractListenableModel {
         this.printWinner();
     }
 
-    public int getStateKey() {
+    public String getStateKey() {
         int gWidth = this.game.getWidth();
         int gHeight = this.game.getHeight();
         String temp = "1";
@@ -428,15 +429,11 @@ public class State extends AbstractListenableModel {
                 }
             }
         }
-        int key = Integer.parseInt(temp, 2);
-        return key;
+
+        BigInteger key = new BigInteger(temp, 2);
+        String key2 = key.toString(16);
+
+        return key2;
     }
 
-    public String keyToString() {
-
-        String res = Integer.toString(game.getCurrentState().getStateKey(), 2);
-        int remainingZeros = 84 - res.length();
-        res = "0".repeat(remainingZeros) + res;
-        return res;
-    }
 }
