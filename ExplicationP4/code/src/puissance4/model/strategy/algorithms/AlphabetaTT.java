@@ -13,11 +13,11 @@ public class AlphabetaTT extends AbstractAlgo {
 
     private TranspositionTable tt;
 
-    public AlphabetaTT(TranspositionTable tt){
-        this.tt=tt;
+    public AlphabetaTT(TranspositionTable tt) {
+        this.tt = tt;
     }
 
-    public AlphabetaTT(){
+    public AlphabetaTT() {
         this(new TranspositionTable());
     }
 
@@ -29,7 +29,6 @@ public class AlphabetaTT extends AbstractAlgo {
         int gHeight = state.getGame().getHeight();
 
         List<Integer> ttEntry = tt.getVal(stKey);
-        System.out.println("ttentry  " + ttEntry);
         if (ttEntry != null && tt.getDepth(stKey) >= depth) {
             if (tt.getFlag(stKey) == 0) {
                 return tt.getValue(stKey);

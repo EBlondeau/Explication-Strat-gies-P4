@@ -23,12 +23,9 @@ public class TranspositionTable {
     };
 
     public List<Integer> getVal(String key) {
-        System.out.println('F');
         if (this.table.containsKey(key)) {
-            System.out.println("FEUR");
             return this.table.get(key);
         } else {
-            System.out.println("ZZZZZ");
             return null;
         }
 
