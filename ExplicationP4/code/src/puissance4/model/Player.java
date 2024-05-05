@@ -1,5 +1,6 @@
 package puissance4.model;
 
+import puissance4.model.strategy.AlgorithmStrategy;
 import puissance4.model.strategy.IStrategy;
 import puissance4.model.strategy.algorithms.AbstractAlgo;
 
@@ -39,8 +40,10 @@ public class Player {
     }
 
     public int[] getLastMoveSet(Game game) {
-        if (this.strategy.getClass().equals(AbstractAlgo.class)) {
-            AbstractAlgo aa = (AbstractAlgo) this.strategy;
+        if (this.strategy.getClass().equals(AlgorithmStrategy.class)) {
+
+            AlgorithmStrategy as = (AlgorithmStrategy) this.strategy;
+            AbstractAlgo aa = as.getAlgo();
             return aa.getAllScore(game.getCurrentState().getPrevState());
         } else {
             throw new UnknownError("Stategie inadapté");

@@ -10,8 +10,8 @@ import puissance4.model.strategy.algorithms.AlphabetaTT;
 public class Main {
     public static void main(String[] args) {
 
-        Game game = new Game(new Player(1, new UserInputStrategy()),
-                new Player(2, new AlgorithmStrategy(new AlphabetaTT())));
+        Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT())),
+                new Player(2, new AlgorithmStrategy(new AlphabetaTT())), 4, 4);
         TranspositionTable t = new TranspositionTable();
 
         while (!game.getCurrentState().isDone()) {
@@ -21,6 +21,7 @@ public class Main {
             game.getCurrentState().play(move);
             System.out.println(game.getCurrentState().getValidPlay());
         }
+        System.out.println("Victoire: " + game.VictoryType());
 
         game.getCurrentState().printStateFull();
 

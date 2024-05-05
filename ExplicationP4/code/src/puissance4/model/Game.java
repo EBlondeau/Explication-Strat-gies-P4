@@ -1,6 +1,6 @@
 package puissance4.model;
 
-import java.util.Arrays;
+import java.util.*;
 
 import puissance4.model.strategy.IStrategy;
 import puissance4.model.strategy.RandomStrategy;
@@ -93,19 +93,18 @@ public class Game extends AbstractListenableModel {
         this.player2.setGame(this);
     }
 
-    public Game(String serializedGame){
-        this.player1= new Player(1, DEFAULT_STRATEGY);
+    public Game(String serializedGame) {
+        this.player1 = new Player(1, DEFAULT_STRATEGY);
         this.player2 = new Player(2, DEFAULT_STRATEGY);
         this.player1.setGame(this);
         this.player2.setGame(this);
 
         String[] attributes = serializedGame.split("_");
-        this.width= Integer.parseInt(attributes[1]);
-        this.height= Integer.parseInt(attributes[2]);
-        this.winningLength= Integer.parseInt(attributes[3]);
-        this.currentState= new State(attributes[0], this);
-        
-       
+        this.width = Integer.parseInt(attributes[1]);
+        this.height = Integer.parseInt(attributes[2]);
+        this.winningLength = Integer.parseInt(attributes[3]);
+        this.currentState = new State(attributes[0], this);
+
     }
 
     /*
@@ -146,8 +145,43 @@ public class Game extends AbstractListenableModel {
         return this.winningLength;
     }
 
-    public void setWinningLength(int winningLength){
-        this.winningLength=winningLength;
+    public void setWinningLength(int winningLength) {
+        this.winningLength = winningLength;
     }
 
+    public String VictoryType() {
+        State st = this.getCurrentState();
+        Player p = null;
+        if (st.isDone()) {
+            int pID = st.hasWon();
+            if (pID == 1) {
+                p = getp2();
+            } else {
+                p = getp1();
+            }
+
+            int bestMove = getBestMove(p.getLastMoveSet(this));
+            if (p.getLastMove(this) == bestMove) {
+                return "Victoire par Zugwang ou coup forcé";
+            } else {
+                return "Victoire par erreur";
+            }
+
+        } else {
+            return "Partie non terminée";
+        }
+
+    }
+
+    public int getBestMove(int[] scores) {
+        int max = -(this.getWidth() * this.getHeight());
+        int index = -1;
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] > max) {
+                max = scores[i];
+                index = i;
+            }
+        }
+        return index;
+    }
 }

@@ -11,8 +11,12 @@ public class AlgorithmStrategy implements IStrategy {
 
     private AbstractAlgo algo;
 
-    public AlgorithmStrategy(AbstractAlgo algo){
-        this.algo=algo;
+    public AlgorithmStrategy(AbstractAlgo algo) {
+        this.algo = algo;
+    }
+
+    public AbstractAlgo getAlgo() {
+        return this.algo;
     }
 
     @Override
