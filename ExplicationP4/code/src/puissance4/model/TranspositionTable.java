@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import org.xml.sax.InputSource;
 
-public class TranspositionTable {
+public class TranspositionTable implements Serializable{
     private static final int MAX_ENTRIES = 2000;
     public LinkedHashMap<String, List<Integer>> table;
 
@@ -83,6 +84,7 @@ public class TranspositionTable {
             System.out.println("bravo");
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("en fait ça marche aps");
         }
     }
@@ -100,6 +102,7 @@ public class TranspositionTable {
             fileInputStream.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("ça veut pas lire zzzz");
         }
         return linkedHashMapLIST;

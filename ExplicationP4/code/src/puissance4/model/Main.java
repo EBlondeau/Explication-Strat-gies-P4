@@ -33,7 +33,7 @@ public class Main {
         System.out.println(t.size());
 
         TranspositionTable t2 = new TranspositionTable();
-        System.out.println(t2.LoadHashMapFromInternalStorage("ExplicationP4/code/all.txt").size());
+        System.out.println(t2.LoadHashMapFromInternalStorage("all2.txt").size());
         System.out.println(t2.size());
     }
 }
