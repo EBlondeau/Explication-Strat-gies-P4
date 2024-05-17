@@ -1,5 +1,7 @@
 package puissance4.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import puissance4.model.strategy.AlgorithmStrategy;
@@ -8,11 +10,11 @@ import puissance4.model.strategy.UserInputStrategy;
 import puissance4.model.strategy.algorithms.AlphabetaTT;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         TranspositionTable t = new TranspositionTable();
 
         Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT(t))),
-                new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 4, 5);
+                new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 4, 4);
         game.setWinningLength(4);
         while (!game.getCurrentState().isDone()) {
             game.getCurrentState().printStateFull();
@@ -26,7 +28,11 @@ public class Main {
         // System.out.println("Victoire: " + game.VictoryType());
 
         game.getCurrentState().printStateFull();
-
+        t.SaveHashMapToInternalStorage("pitiemr.txt", t.table);
         System.out.println(t.size());
+
+        TranspositionTable t2 = new TranspositionTable();
+        System.out.println(t2.LoadHashMapFromInternalStorage("pitiemr.txt").size());
+        System.out.println(t2.size());
     }
 }

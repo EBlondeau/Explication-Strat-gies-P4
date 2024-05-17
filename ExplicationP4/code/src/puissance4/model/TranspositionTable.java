@@ -1,9 +1,26 @@
 package puissance4.model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import org.xml.sax.InputSource;
 
 public class TranspositionTable {
     private static final int MAX_ENTRIES = 2000;
@@ -56,10 +73,29 @@ public class TranspositionTable {
         }
     }
 
-    public void toXML() {
-        LinkedHashMap yourData = this.table;
-        XStream xstream = new XStream();
-        String yourXML = xstream.toXml(yourData);
+    public void SaveHashMapToInternalStorage(String SavedData, LinkedHashMap<String, List<Integer>> linkedHashMapList) {
+        try {
+            FileOutputStream fos = new FileOutputStream(SavedData, false);
+            ObjectOutputStream s = new ObjectOutputStream(fos);
+            s.writeObject(linkedHashMapList);
+            s.close();
+
+        } catch (Exception e) {
+        }
     }
 
+    public LinkedHashMap<String, List<Integer>> LoadHashMapFromInternalStorage(String SavedData) {
+        LinkedHashMap<String, List<Integer>> linkedHashMapLIST = new LinkedHashMap<String, List<Integer>>();
+        try {
+            FileInputStream fileInputStream = new FileInputStream(SavedData);
+            System.out.println(fileInputStream);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            linkedHashMapLIST = (LinkedHashMap<String, List<Integer>>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+
+        } catch (Exception e) {
+        }
+        return linkedHashMapLIST;
+    }
 }
