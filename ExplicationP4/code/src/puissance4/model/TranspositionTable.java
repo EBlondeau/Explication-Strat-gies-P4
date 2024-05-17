@@ -75,26 +75,32 @@ public class TranspositionTable {
 
     public void SaveHashMapToInternalStorage(String SavedData, LinkedHashMap<String, List<Integer>> linkedHashMapList) {
         try {
-            FileOutputStream fos = new FileOutputStream(SavedData, false);
+            File f = new File(SavedData);
+
+            FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream s = new ObjectOutputStream(fos);
             s.writeObject(linkedHashMapList);
             s.close();
 
         } catch (Exception e) {
+            System.out.println("en fait ça marche aps");
         }
     }
 
     public LinkedHashMap<String, List<Integer>> LoadHashMapFromInternalStorage(String SavedData) {
         LinkedHashMap<String, List<Integer>> linkedHashMapLIST = new LinkedHashMap<String, List<Integer>>();
         try {
-            FileInputStream fileInputStream = new FileInputStream(SavedData);
+            File f = new File(SavedData);
+            FileInputStream fileInputStream = new FileInputStream(f);
             System.out.println(fileInputStream);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             linkedHashMapLIST = (LinkedHashMap<String, List<Integer>>) objectInputStream.readObject();
+            System.out.println("FFFFFF" + linkedHashMapLIST.size());
             objectInputStream.close();
             fileInputStream.close();
 
         } catch (Exception e) {
+            System.out.println("ça veut pas lire zzzz");
         }
         return linkedHashMapLIST;
     }

@@ -1,6 +1,7 @@
 package puissance4.model;
 
 import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -28,11 +29,11 @@ public class Main {
         // System.out.println("Victoire: " + game.VictoryType());
 
         game.getCurrentState().printStateFull();
-        t.SaveHashMapToInternalStorage("pitiemr.txt", t.table);
+        t.SaveHashMapToInternalStorage("all.txt", t.table);
         System.out.println(t.size());
 
         TranspositionTable t2 = new TranspositionTable();
-        System.out.println(t2.LoadHashMapFromInternalStorage("pitiemr.txt").size());
+        System.out.println(t2.LoadHashMapFromInternalStorage("ExplicationP4/code/all.txt").size());
         System.out.println(t2.size());
     }
 }
