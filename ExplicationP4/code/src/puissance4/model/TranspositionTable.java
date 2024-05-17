@@ -56,4 +56,10 @@ public class TranspositionTable {
         }
     }
 
+    public void toXML() {
+        LinkedHashMap yourData = this.table;
+        XStream xstream = new XStream();
+        String yourXML = xstream.toXml(yourData);
+    }
+
 }
