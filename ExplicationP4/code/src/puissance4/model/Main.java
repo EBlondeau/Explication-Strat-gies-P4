@@ -29,7 +29,7 @@ public class Main {
         // System.out.println("Victoire: " + game.VictoryType());
 
         game.getCurrentState().printStateFull();
-        t.SaveHashMapToInternalStorage("all.txt", t.table);
+        t.SaveHashMapToInternalStorage("all2.txt", t.table);
         System.out.println(t.size());
 
         TranspositionTable t2 = new TranspositionTable();

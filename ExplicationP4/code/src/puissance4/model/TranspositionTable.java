@@ -75,12 +75,12 @@ public class TranspositionTable {
 
     public void SaveHashMapToInternalStorage(String SavedData, LinkedHashMap<String, List<Integer>> linkedHashMapList) {
         try {
-            File f = new File(SavedData);
 
-            FileOutputStream fos = new FileOutputStream(f);
+            FileOutputStream fos = new FileOutputStream(SavedData);
             ObjectOutputStream s = new ObjectOutputStream(fos);
             s.writeObject(linkedHashMapList);
             s.close();
+            System.out.println("bravo");
 
         } catch (Exception e) {
             System.out.println("en fait ça marche aps");
