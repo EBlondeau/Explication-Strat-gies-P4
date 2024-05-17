@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TranspositionTable {
-    private static final int MAX_ENTRIES = 5;
+    private static final int MAX_ENTRIES = 2000;
     public LinkedHashMap<String, List<Integer>> table;
 
     public TranspositionTable() {
@@ -46,6 +46,14 @@ public class TranspositionTable {
 
     public int getFlag(String key) {
         return getVal(key).get(2); // 0 = exact , -1 = Lower , 1 = Upper
+    }
+
+    public String FindFirstEntryWithArrayMethod() {
+        if (this.size() != 0) {
+            return String.valueOf(this.table.entrySet().toArray()[0]);
+        } else {
+            return null;
+        }
     }
 
 }
