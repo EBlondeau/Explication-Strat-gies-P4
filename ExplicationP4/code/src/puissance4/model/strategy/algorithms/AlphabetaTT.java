@@ -38,10 +38,11 @@ public class AlphabetaTT extends AbstractAlgo {
             } else if (tt.getFlag(stKey) == 1) {
                 beta = Math.min(beta, tt.getValue(stKey));
             }
-        }
-        if (alpha >= beta) {
-            return tt.getValue(stKey);
 
+            if (alpha >= beta) {
+                return tt.getValue(stKey);
+
+            }
         }
 
         int winner = state.hasWon();
@@ -65,8 +66,6 @@ public class AlphabetaTT extends AbstractAlgo {
             value = Math.max(value,
                     -negAlphabeta(nextState, depth - 1, -beta, -alpha));
 
-            if (value > alpha)
-                alpha = value;
             if (alpha >= beta) {
                 break;
             }
