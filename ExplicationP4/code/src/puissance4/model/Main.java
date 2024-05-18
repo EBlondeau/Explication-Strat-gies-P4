@@ -13,6 +13,8 @@ import puissance4.model.strategy.algorithms.AlphabetaTT;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         TranspositionTable t = new TranspositionTable();
+        // t.table = t.LoadHashMapFromInternalStorage("all2.tt");
+        System.out.println(t.size());
 
         Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT(t))),
                 new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 4, 4);
@@ -29,11 +31,11 @@ public class Main {
         // System.out.println("Victoire: " + game.VictoryType());
 
         game.getCurrentState().printStateFull();
-        t.SaveHashMapToInternalStorage("all2.txt", t.table);
+        t.SaveHashMapToInternalStorage("all2.tt", t.table);
         System.out.println(t.size());
 
         TranspositionTable t2 = new TranspositionTable();
-        System.out.println(t2.LoadHashMapFromInternalStorage("all2.txt").size());
+        System.out.println(t2.LoadHashMapFromInternalStorage("all2.tt").size());
         System.out.println(t2.size());
     }
 }

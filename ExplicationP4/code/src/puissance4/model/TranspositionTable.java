@@ -23,8 +23,8 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import org.xml.sax.InputSource;
 
-public class TranspositionTable implements Serializable{
-    private static final int MAX_ENTRIES = 2000;
+public class TranspositionTable implements Serializable {
+    private static final int MAX_ENTRIES = 20000;
     public LinkedHashMap<String, List<Integer>> table;
 
     public TranspositionTable() {
