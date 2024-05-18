@@ -99,7 +99,6 @@ public abstract class AbstractAlgo {
         for (int q = 0; q < steps; q++) {
             int index = i + (q % 2 == 0 ? q / 2 : -(q / 2 + 1)); // index lookup here
 
-            System.out.println("feur  " + index);
             if (validPlays.contains(index)) {
                 res[index] = this.getScore(state, index);
             } else {

@@ -81,11 +81,9 @@ public class TranspositionTable implements Serializable {
             ObjectOutputStream s = new ObjectOutputStream(fos);
             s.writeObject(linkedHashMapList);
             s.close();
-            System.out.println("bravo");
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("en fait ça marche aps");
         }
     }
 
@@ -97,13 +95,11 @@ public class TranspositionTable implements Serializable {
             System.out.println(fileInputStream);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             linkedHashMapLIST = (LinkedHashMap<String, List<Integer>>) objectInputStream.readObject();
-            System.out.println("FFFFFF" + linkedHashMapLIST.size());
             objectInputStream.close();
             fileInputStream.close();
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("ça veut pas lire zzzz");
         }
         return linkedHashMapLIST;
     }
