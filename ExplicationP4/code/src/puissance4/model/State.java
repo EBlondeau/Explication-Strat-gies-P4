@@ -58,12 +58,12 @@ public class State extends AbstractListenableModel {
      * @param game          the game which the state is associated to
      * @param currentPlayer the current player on this state
      */
-    public State(int[][] grille, int[] colState, Game game, Player currentPlayer) {
+    public State(int[][] grille, int[] colState, Game game, Player currentPlayer, State prevState) {
         this.game = game;
         this.colState = colState;
         this.currentPlayer = currentPlayer;
         this.grille = grille;
-        this.prevState = null;
+        this.prevState = prevState;
     }
 
     /**
@@ -317,7 +317,7 @@ public class State extends AbstractListenableModel {
 
             // Retourne un nouveau state correspondant au State courant après avoir effectué
             // le coup
-            State nextState = new State(newGrille, newColState, this.game, this.getNextPlayer());
+            State nextState = new State(newGrille, newColState, this.game, this.getNextPlayer(), this);
             // Update l'état du game si demandé
             if (updateGame)
                 this.game.updateState(nextState);
