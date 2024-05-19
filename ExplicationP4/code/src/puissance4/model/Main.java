@@ -27,11 +27,7 @@ public class Main {
             System.out.println("table" + t.FindFirstEntryWithArrayMethod());
             System.out.println("table size " + t.size());
         }
-        // System.out.println("Victoire: " + game.VictoryType());
-
-        game.getCurrentState().printStateFull();
-        t.SaveHashMapToInternalStorage("all2.tt", t.table);
-        System.out.println(t.size());
+        System.out.println("Victoire: " + game.VictoryType());
 
     }
 }

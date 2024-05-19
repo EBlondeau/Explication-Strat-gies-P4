@@ -156,8 +156,10 @@ public class Game extends AbstractListenableModel {
             int pID = st.hasWon();
             if (pID == 1) {
                 p = getp2();
-            } else {
+            } else if (pID == 2) {
                 p = getp1();
+            } else {
+                return "égalité";
             }
 
             int bestMove = getBestMove(p.getLastMoveSet(this));
