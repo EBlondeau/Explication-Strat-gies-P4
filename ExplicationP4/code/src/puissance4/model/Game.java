@@ -162,7 +162,7 @@ public class Game extends AbstractListenableModel {
                 return "égalité";
             }
 
-            int bestMove = getBestMove(p.getLastMoveSet(this));
+            int bestMove = getBestMove(p.getLastMoveSet());
             if (p.getLastMove(this) == bestMove) {
                 return "Victoire par Zugwang ou coup forcé";
             } else {

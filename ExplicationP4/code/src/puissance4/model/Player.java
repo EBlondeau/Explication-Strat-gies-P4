@@ -39,12 +39,12 @@ public class Player {
 
     }
 
-    public int[] getLastMoveSet(Game game) {
+    public int[] getLastMoveSet() {
         if (this.strategy.getClass().equals(AlgorithmStrategy.class)) {
 
             AlgorithmStrategy as = (AlgorithmStrategy) this.strategy;
             AbstractAlgo aa = as.getAlgo();
-            return aa.getAllScore(game.getCurrentState().getPrevState());
+            return aa.getAllScore(this.game.getCurrentState().getPrevState());
         } else {
             throw new UnknownError("Stategie inadapté");
         }
