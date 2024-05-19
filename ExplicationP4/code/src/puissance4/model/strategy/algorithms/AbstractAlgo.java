@@ -1,6 +1,7 @@
 package puissance4.model.strategy.algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import puissance4.model.State;
 
@@ -119,4 +120,23 @@ public abstract class AbstractAlgo {
         State nextState = state.play(move, false);
         return -this.algorithm(nextState, this.depth);
     }
+    /*
+     * public int getScoreIterativeDeepening(State state, int move) {
+     * State nextState = state.play(move, false);
+     * int height = nextState.getGame().getHeight();
+     * int width = nextState.getGame().getWidth();
+     * int min = (width * height - Arrays.stream(nextState.colState).sum()) / 2;
+     * int max = (width * height + 1 - Arrays.stream(nextState.colState).sum()) / 2;
+     * while (min < max) {
+     * int med = min + (max - min) / 2;
+     * if (med <= 0 && min / 2 < med) {
+     * med = min / 2;
+     * } else if (med >= 0 && max / 2 > med) {
+     * med = max / 2;
+     * }
+     * int res = -this.algorithm(nextState, med);
+     * }
+     * return -this.algorithm(nextState, this.depth);
+     * }
+     */
 }
