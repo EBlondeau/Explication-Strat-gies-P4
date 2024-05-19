@@ -17,6 +17,7 @@ public class State extends AbstractListenableModel {
     private Player currentPlayer;
     public int[] colState;
     private State prevState;
+    public String StateKey;
 
     /**
      * Constructeur d'un état initial
@@ -29,6 +30,7 @@ public class State extends AbstractListenableModel {
         this.currentPlayer = this.game.getp1();
         this.colState = new int[this.game.getWidth()];
         this.prevState = null;
+        this.StateKey = this.getStateKey();
     }
 
     /**
@@ -48,6 +50,7 @@ public class State extends AbstractListenableModel {
             }
         }
         this.prevState = state;
+        this.StateKey = this.getStateKey();
     }
 
     /**
@@ -64,6 +67,7 @@ public class State extends AbstractListenableModel {
         this.currentPlayer = currentPlayer;
         this.grille = grille;
         this.prevState = null;
+        this.StateKey = this.getStateKey();
     }
 
     /**
@@ -90,6 +94,7 @@ public class State extends AbstractListenableModel {
             this.currentPlayer = this.getNextPlayer();
         }
         this.prevState = null;
+        this.StateKey = this.getStateKey();
     }
 
     public int checkLigne(int i, int j, int length) {

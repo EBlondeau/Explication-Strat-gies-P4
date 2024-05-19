@@ -23,7 +23,7 @@ public class AlphabetaTT extends AbstractAlgo {
 
     public int negAlphabeta(State state, int depth, int alpha, int beta) {
         int alphOrig = alpha;
-        String stKey = state.getStateHashCode();
+        String stKey = state.getStateKey();
 
         int gWidth = state.getGame().getWidth();
         int gHeight = state.getGame().getHeight();
