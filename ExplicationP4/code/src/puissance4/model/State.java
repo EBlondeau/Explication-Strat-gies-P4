@@ -66,12 +66,9 @@ public class State extends AbstractListenableModel {
         this.colState = colState;
         this.currentPlayer = currentPlayer;
         this.grille = grille;
-<<<<<<< HEAD
         this.prevState = prevState;
-=======
         this.prevState = null;
         this.StateKey = this.getStateKey();
->>>>>>> 302c6f580c2a05ac939fb8f881bbd7b188fde0ba
     }
 
     /**
