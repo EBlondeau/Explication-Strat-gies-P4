@@ -44,7 +44,8 @@ public class Player {
 
             AlgorithmStrategy as = (AlgorithmStrategy) this.strategy;
             AbstractAlgo aa = as.getAlgo();
-            return aa.getAllScore(this.game.getCurrentState().getPrevState());
+            State cs = this.game.getCurrentState();
+            return aa.getAllScore(cs.getPrevState());
         } else {
             throw new UnknownError("Stategie inadapté");
         }
