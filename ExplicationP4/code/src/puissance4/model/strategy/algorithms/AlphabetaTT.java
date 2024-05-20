@@ -66,7 +66,7 @@ public class AlphabetaTT extends AbstractAlgo {
             State nextState = state.play(move, false);
             value = Math.max(value,
                     -negAlphabeta(nextState, depth - 1, -beta, -alpha, this.cpt + 1));
-
+            alpha = Math.max(alpha, value);
             if (alpha >= beta) {
                 break;
             }

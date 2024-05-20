@@ -16,7 +16,7 @@ public class Main {
         System.out.println(t.size());
 
         Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT(t))),
-                new Player(2, new UserInputStrategy()), 4, 4);
+                new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 4, 4);
         game.setWinningLength(4);
         while (!game.getCurrentState().isDone()) {
             game.getCurrentState().printStateFull();
