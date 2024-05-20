@@ -3,6 +3,8 @@ package puissance4.model;
 import puissance4.model.strategy.AlgorithmStrategy;
 import puissance4.model.strategy.IStrategy;
 import puissance4.model.strategy.algorithms.AbstractAlgo;
+import puissance4.model.strategy.algorithms.Alphabeta;
+import puissance4.model.strategy.algorithms.AlphabetaTT;
 
 import java.io.EOFException;
 
@@ -47,7 +49,9 @@ public class Player {
             State cs = this.game.getCurrentState();
             return aa.getAllScore(cs.getPrevState());
         } else {
-            throw new UnknownError("Stategie inadapté");
+            Alphabeta a = new Alphabeta();
+            return a.getAllScore(this.game.getCurrentState().getPrevState());
+
         }
     }
 
