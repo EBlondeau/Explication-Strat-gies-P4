@@ -10,7 +10,7 @@ public class AlphabetaTT extends AbstractAlgo {
 
     public static final int alpha = -1000000;
     public static final int beta = 1000000;
-
+    public int cpt;
     private TranspositionTable tt;
 
     public AlphabetaTT(TranspositionTable tt) {
@@ -21,7 +21,8 @@ public class AlphabetaTT extends AbstractAlgo {
         this(new TranspositionTable());
     }
 
-    public int negAlphabeta(State state, int depth, int alpha, int beta) {
+    public int negAlphabeta(State state, int depth, int alpha, int beta, int cpt) {
+        this.cpt = cpt;
         int alphOrig = alpha;
         String stKey = state.getStateKey();
 
@@ -64,7 +65,7 @@ public class AlphabetaTT extends AbstractAlgo {
         for (int move : state.getValidPlay()) {
             State nextState = state.play(move, false);
             value = Math.max(value,
-                    -negAlphabeta(nextState, depth - 1, -beta, -alpha));
+                    -negAlphabeta(nextState, depth - 1, -beta, -alpha, this.cpt + 1));
 
             if (alpha >= beta) {
                 break;
@@ -86,9 +87,21 @@ public class AlphabetaTT extends AbstractAlgo {
         return value;
     }
 
+    public int getCpt() {
+        return this.cpt;
+    }
+
+    public void resetCpt() {
+        this.cpt = 0;
+    }
+
+    public void setCpt(int c) {
+        this.cpt = c;
+    }
+
     @Override
     public int algorithm(State state, int depth) {
-        return this.negAlphabeta(state, depth, alpha, beta);
+        return this.negAlphabeta(state, depth, alpha, beta, 0);
     }
 
 }

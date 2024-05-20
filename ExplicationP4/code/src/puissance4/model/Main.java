@@ -17,7 +17,7 @@ public class Main {
 
         Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT(t))),
                 new Player(2, new UserInputStrategy()), 4, 4);
-        game.setWinningLength(3);
+        game.setWinningLength(4);
         while (!game.getCurrentState().isDone()) {
             game.getCurrentState().printStateFull();
             int move = game.getCurrentState().getCurrentPlayer().play();
@@ -27,11 +27,10 @@ public class Main {
             System.out.println("table" + t.FindFirstEntryWithArrayMethod());
             System.out.println("table size " + t.size());
         }
-
+        System.out.println("feur");
+        System.out.println(game.VictoryType());
         game.getCurrentState().printStateFull();
-
         System.out.println("Victoire: " + game.VictoryType());
-        game.getCurrentState().printStateFull();
 
     }
 }
