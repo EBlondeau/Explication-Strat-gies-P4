@@ -14,6 +14,7 @@ import puissance4.model.State;
 public abstract class AbstractAlgo {
 
     private int depth;
+    protected int cpt;
     public static final int DEFAULT_DEPTH = 50;
 
     public AbstractAlgo(int depth) {
@@ -139,4 +140,16 @@ public abstract class AbstractAlgo {
      * return -this.algorithm(nextState, this.depth);
      * }
      */
+
+    public int getCpt() {
+        return this.cpt;
+    }
+
+    public void resetCpt() {
+        this.cpt = 0;
+    }
+
+    public void setCpt(int c) {
+        this.cpt = c;
+    }
 }

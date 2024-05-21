@@ -4,8 +4,8 @@ import puissance4.model.Game;
 
 public class GameDemo {
     public static void main(String[] args) {
-        //Game game= new Game("0513252561043463536314113144254500_7_6_4");
-        Game game= new Game();
+        Game game= new Game("0_5_4_3");
+        //Game game= new Game();
         GameGUI gGUI= new GameGUI(game);
     }
 }
