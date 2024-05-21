@@ -8,7 +8,7 @@ import java.util.Arrays;
 import util.observer.AbstractListenableModel;
 
 /*
- * Interface représentant un état d'un jeu
+ * Class representing a state of a game
  */
 public class State extends AbstractListenableModel {
 
@@ -20,7 +20,7 @@ public class State extends AbstractListenableModel {
     public String StateKey;
 
     /**
-     * Constructeur d'un état initial
+     * Constructor of an initial state
      * 
      * @param game
      */
@@ -82,13 +82,11 @@ public class State extends AbstractListenableModel {
         this.game = game;
         this.currentPlayer = this.game.getp1();
         String[] splitMoves = moves.split("");
-        // System.out.println(Arrays.toString(splitMoves));
         this.grille = new int[this.game.getWidth()][this.game.getHeight()];
         this.colState = new int[this.game.getWidth()];
         // Inputs all the moves in the state
         for (int i = 0; i < splitMoves.length; i++) {
             int move = Integer.parseInt(splitMoves[i]);
-            // System.out.println(move);
             this.grille[move][colState[move]] = this.currentPlayer.getId();
             this.colState[move] += 1;
             this.currentPlayer = this.getNextPlayer();
@@ -289,11 +287,8 @@ public class State extends AbstractListenableModel {
     public State play(int move, boolean updateGame) throws UnknownError {
         ArrayList<Integer> plays = this.getValidPlay();
         if (!plays.contains(move)) {
-            System.out.println("gros naze");
-            throw new UnknownError("move non valide");
+            throw new UnknownError("Non valid move");
         } else {
-            // System.out.println(move);
-            // System.out.println(colState[move]);
 
             int gWidth = this.game.getWidth();
             int gHeight = this.game.getHeight();

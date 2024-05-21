@@ -63,13 +63,14 @@ public class Game extends AbstractListenableModel {
     }
 
     /**
-     * Constructeur complet d'une partie
+     * Constructeur complet d'une partie avec winningLength par défaut
      * 
-     * @param player1
-     * @param player2
-     * @param height
-     * @param width
-     * @param currentState
+     * @param player1      joueur 1
+     * @param player2      joueur 2
+     * @param height       hauteur de la grille
+     * @param width        largeur de la grille
+     * @param currentState état courant passé en parametre, la partie ne commence
+     *                     pas avec une grille vide
      */
     public Game(Player player1, Player player2, int height, int width, State currentState) {
         this.width = width;
@@ -82,6 +83,16 @@ public class Game extends AbstractListenableModel {
         this.player2.setGame(this);
     }
 
+    /**
+     * 
+     * @param player1       joueur 1
+     * @param player2       joueur 2
+     * @param height        hauteur de la grille
+     * @param width         largeur de la grille
+     * @param currentState  état courant passé en parametre, la partie ne commence
+     *                      pas avec une grille vide
+     * @param winningLength alignement nécessaire pour gagner
+     */
     public Game(Player player1, Player player2, int height, int width, State currentState, int winningLength) {
         this.width = width;
         this.height = height;
@@ -93,6 +104,11 @@ public class Game extends AbstractListenableModel {
         this.player2.setGame(this);
     }
 
+    /**
+     * Constructor for a game using a serialized Game
+     * 
+     * @param serializedGame serialized Game, condensed in a single variable
+     */
     public Game(String serializedGame) {
         this.player1 = new Player(1, DEFAULT_STRATEGY);
         this.player2 = new Player(2, DEFAULT_STRATEGY);
@@ -106,15 +122,6 @@ public class Game extends AbstractListenableModel {
         this.currentState = new State(attributes[0], this);
 
     }
-
-    /*
-     * public void initializeGame(){
-     * Player p1 = new Player(1);
-     * Player p2 = new Player(2);
-     * State s = new State()
-     * Game g= new Game(p1, p2, );
-     * };
-     */
 
     public Player getp1() {
         return this.player1;
@@ -149,6 +156,11 @@ public class Game extends AbstractListenableModel {
         this.winningLength = winningLength;
     }
 
+    /**
+     * Detect the type of victory
+     * 
+     * @return a string indicating the type of victory
+     */
     public String VictoryType() {
         State st = this.getCurrentState();
         Player p = null;
@@ -175,6 +187,12 @@ public class Game extends AbstractListenableModel {
 
     }
 
+    /**
+     * Return the best move among a list of moves
+     * 
+     * @param scores list of moves
+     * @return the best move, the index of the highest score
+     */
     public int getBestMove(int[] scores) {
         int max = -(this.getWidth() * this.getHeight());
         int index = -1;

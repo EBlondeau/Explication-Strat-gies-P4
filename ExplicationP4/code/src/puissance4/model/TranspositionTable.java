@@ -23,6 +23,12 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import org.xml.sax.InputSource;
 
+/**
+ * Implementation of the transposition table
+ * Consist of a LinkedHashMap where the keys are the stateKey given by the
+ * getStateKey function and the value is an array of int with the first value
+ * being the depth, the second the value of the node and the third the flag
+ */
 public class TranspositionTable implements Serializable {
     private static final int MAX_ENTRIES = 200000;
     public LinkedHashMap<String, List<Integer>> table;
@@ -66,7 +72,7 @@ public class TranspositionTable implements Serializable {
         return getVal(key).get(2); // 0 = exact , -1 = Lower , 1 = Upper
     }
 
-    public String FindFirstEntryWithArrayMethod() {
+    public String getFirstEntry() {
         if (this.size() != 0) {
             return String.valueOf(this.table.entrySet().toArray()[0]);
         } else {
@@ -74,7 +80,7 @@ public class TranspositionTable implements Serializable {
         }
     }
 
-    public void SaveHashMapToInternalStorage(String SavedData, LinkedHashMap<String, List<Integer>> linkedHashMapList) {
+    public void SaveHashMap(String SavedData, LinkedHashMap<String, List<Integer>> linkedHashMapList) {
         try {
 
             FileOutputStream fos = new FileOutputStream(SavedData);
@@ -87,7 +93,7 @@ public class TranspositionTable implements Serializable {
         }
     }
 
-    public LinkedHashMap<String, List<Integer>> LoadHashMapFromInternalStorage(String SavedData) {
+    public LinkedHashMap<String, List<Integer>> LoadHashMap(String SavedData) {
         LinkedHashMap<String, List<Integer>> linkedHashMapLIST = new LinkedHashMap<String, List<Integer>>();
         try {
             File f = new File(SavedData);

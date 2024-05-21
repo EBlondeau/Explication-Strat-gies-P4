@@ -7,8 +7,17 @@ public class Alphabeta extends AbstractAlgo {
     public static final int alpha = -1000000;
     public static final int beta = 1000000;
 
+    /**
+     * 
+     * @param state State were we want to compute the value
+     * @param depth Max depth allowed
+     * @param alpha Alpha pruning parameter
+     * @param beta  beta Beta pruning parameter
+     * @param cpt   Node counter
+     * @return value of Node
+     */
     public int negAlphabeta(State state, int depth, int alpha, int beta) {
-        this.cpt+=1;
+        this.cpt += 1;
         int gWidth = state.getGame().getWidth();
         int gHeight = state.getGame().getHeight();
 
@@ -40,10 +49,6 @@ public class Alphabeta extends AbstractAlgo {
 
         return value;
     }
-
-   
-
-    
 
     @Override
     public int algorithm(State state, int depth) {

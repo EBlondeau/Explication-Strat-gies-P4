@@ -6,10 +6,10 @@ import java.util.Arrays;
 import puissance4.model.State;
 
 /**
- * Classe abstraite représentant un Algoritme pour le puissance 4
- * Consiste en une fonction abstraite Algoritme qui permet d'implementer l'algo
- * souhaité
- * Ainsi que de fonction permettant d'obtenir les scores retournés par cet algo
+ * Abstract class representing an algorithm for the Connect 4
+ * Has a abstract function algorithm to implement the wanted algorithm
+ * (negamax,alphabeta...)
+ * Also has a function to get the scores returned by the algorithm
  */
 public abstract class AbstractAlgo {
 
@@ -27,34 +27,22 @@ public abstract class AbstractAlgo {
 
     /**
      * Fonction implémentant un algoritme
+     * Function implementing the algorithm
      * 
-     * @param state l'état sur lequel appliquer l'algoritme
-     * @param depth la profondeur souhaitée
-     * @return le score maximum trouvé
+     * @param state State to apply the algorithm
+     * @param depth Wanted Depth
+     * @return Best score
      */
     public abstract int algorithm(State state, int depth);
 
     /**
      * Fonction retournant le meilleur coup pour un état donné
+     * Function returning the best move for a given state
      * 
-     * @param state l'état donné
-     * @return le meilleur coup pour cet état
+     * @param state Given State
+     * @return Best move for this state
      */
-    /*
-     * public int getBestMove(State state) {
-     * int[] scores = this.getAllScore(state);
-     * int max = -(state.getGame().getWidth() * state.getGame().getHeight());
-     * int index = -1;
-     * for (int i = 0; i < scores.length; i++) {
-     * if (scores[i] > max) {
-     * max = scores[i];
-     * index = i;
-     * }
-     * }
-     * 
-     * return index;
-     * }
-     */
+
     public int getBestMove(State state) {
         int[] scores = this.getAllScore(state);
         int max = -(state.getGame().getWidth() * state.getGame().getHeight());
@@ -62,7 +50,7 @@ public abstract class AbstractAlgo {
         int steps = (scores.length);
         int i = (0 + scores.length) >> 1;
         for (int q = 0; q < steps; q++) {
-            int index = i + (q % 2 == 0 ? q / 2 : -(q / 2 + 1)); // index lookup here
+            int index = i + (q % 2 == 0 ? q / 2 : -(q / 2 + 1));
             if (scores[index] > max) {
                 max = scores[index];
                 res = index;
@@ -72,27 +60,12 @@ public abstract class AbstractAlgo {
     }
 
     /**
-     * Fonction retournant les scores de chaques coups possibles pour un état donné
+     * Function returning the scores of each valid moves for a given state
      * 
-     * @param state l'état donné
-     * @return une liste des scores
+     * @param state Given stae
+     * @return list of scores
      */
-    /*
-     * public int[] getAllScore(State state) {
-     * ArrayList<Integer> validPlays = state.getValidPlay();
-     * int[] res = new int[state.getGame().getWidth()];
-     * for (int i = 0; i < state.getGame().getWidth(); i++) {
-     * if (validPlays.contains(i)) {
-     * res[i] = this.getScore(state, i);
-     * } else {
-     * res[i] = -100000;
-     * }
-     * 
-     * }
-     * 
-     * return res;
-     * }
-     */
+
     public int[] getAllScore(State state) {
         ArrayList<Integer> validPlays = state.getValidPlay();
         int[] res = new int[state.getGame().getWidth()];
@@ -111,11 +84,11 @@ public abstract class AbstractAlgo {
     }
 
     /**
-     * Fonction retournant le score pour un coups donné sur un état donné
+     * Function returning the score of a move for a given State
      * 
-     * @param state l'état donné
-     * @param move  le coup correspondant
-     * @return le score de ce coup
+     * @param state Given State
+     * @param move  Corresponding Move
+     * @return Score of the move
      */
     public int getScore(State state, int move) {
         State nextState = state.play(move, false);
