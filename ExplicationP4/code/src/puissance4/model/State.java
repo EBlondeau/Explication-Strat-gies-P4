@@ -95,6 +95,14 @@ public class State extends AbstractListenableModel {
         this.StateKey = this.getStateKey();
     }
 
+    /**
+     * check if there is an alignement in line to the right from the case
+     * 
+     * @param i      coordinate of the case
+     * @param j      coordinate of the case
+     * @param length winningLength of the game
+     * @return the id of the player that made the alignment, if none return 0
+     */
     public int checkLigne(int i, int j, int length) {
         int c = grille[i][j];
 
@@ -112,11 +120,12 @@ public class State extends AbstractListenableModel {
     }
 
     /**
-     * TEMPORAIRE POUR L'INSTANT C'EST A CHIER MM PAS SUR QUE ÇA MARCHE
+     * check if there is an alignement in column below from the case
      * 
-     * regarde si il y a 4 valeurs en colonnes du meme joueur
-     * 
-     * @return playerID du gagnant
+     * @param i      coordinate of the case
+     * @param j      coordinate of the case
+     * @param length winningLength of the game
+     * @return the id of the player that made the alignment, if none return 0
      */
     public int checkColonne(int i, int j, int length) {
         int c = grille[i][j];
@@ -134,6 +143,14 @@ public class State extends AbstractListenableModel {
         return 0;
     }
 
+    /**
+     * check if there is an alignement in diagonal to the right from the case
+     * 
+     * @param i      coordinate of the case
+     * @param j      coordinate of the case
+     * @param length winningLength of the game
+     * @return the id of the player that made the alignment, if none return 0
+     */
     public int checkDiagonal(int i, int j, int length) {
         int c = grille[i][j];
 
@@ -150,6 +167,14 @@ public class State extends AbstractListenableModel {
         return 0;
     }
 
+    /**
+     * check if there is an alignement in diagonal to the left from the case
+     * 
+     * @param i      coordinate of the case
+     * @param j      coordinate of the case
+     * @param length winningLength of the game
+     * @return the id of the player that made the alignment, if none return 0
+     */
     public int checkDiagonalBw(int i, int j, int length) {
 
         int c = grille[i][j];
@@ -167,6 +192,11 @@ public class State extends AbstractListenableModel {
         return 0;
     }
 
+    /**
+     * Check the entire board if there is an alignement
+     * 
+     * @return a potential winner
+     */
     public int hasWon() {
         int winner = 0;
         int l = this.game.getWinningLength();
@@ -213,10 +243,20 @@ public class State extends AbstractListenableModel {
         return winner;
     }
 
+    /**
+     * Check if the game is done
+     * 
+     * @return true if the game is over, false otherwise
+     */
     public boolean isDone() {
         return this.isFull() || this.hasWon() != 0;
     }
 
+    /**
+     * Check if the board is full
+     * 
+     * @return true if the board is full, false otherwise
+     */
     public boolean isFull() {
         boolean full = true;
         for (int i = 0; i < this.game.getWidth(); i++) {
@@ -421,7 +461,6 @@ public class State extends AbstractListenableModel {
         int gWidth = this.game.getWidth();
         int gHeight = this.game.getHeight();
         String temp = "1";
-        // DeepCopy grille en premier
         int[][] newGrille = new int[gWidth][gHeight];
         for (int i = 0; i < gWidth; i++) {
             for (int j = 0; j < gHeight; j++) {

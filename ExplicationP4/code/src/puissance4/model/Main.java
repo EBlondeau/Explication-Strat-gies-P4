@@ -27,7 +27,6 @@ public class Main {
             System.out.println("table" + t.getFirstEntry());
             System.out.println("table size " + t.size());
         }
-        System.out.println("feur");
         System.out.println(game.VictoryType());
         game.getCurrentState().printStateFull();
         System.out.println("Victoire: " + game.VictoryType());
