@@ -16,7 +16,7 @@ public class Main {
         System.out.println(t.size());
 
         Game game = new Game(new Player(1, new AlgorithmStrategy(new AlphabetaTT(t))),
-                new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 4, 4);
+                new Player(2, new AlgorithmStrategy(new AlphabetaTT(t))), 5, 5);
         game.setWinningLength(4);
         while (!game.getCurrentState().isDone()) {
             game.getCurrentState().printStateFull();
@@ -24,10 +24,9 @@ public class Main {
             System.out.println("Played move:" + move);
             game.getCurrentState().play(move);
             System.out.println(game.getCurrentState().getValidPlay());
-            System.out.println("table" + t.FindFirstEntryWithArrayMethod());
+            System.out.println("table" + t.getFirstEntry());
             System.out.println("table size " + t.size());
         }
-        System.out.println("feur");
         System.out.println(game.VictoryType());
         game.getCurrentState().printStateFull();
         System.out.println("Victoire: " + game.VictoryType());

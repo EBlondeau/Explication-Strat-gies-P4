@@ -9,9 +9,10 @@ import puissance4.model.Game;
  */
 public interface IStrategy {
     /**
-     * Strategie de jeu
-     * @param state l'état sur lequel appliquer la stratégies
-     * @return un coup à jouer
+     * Game strategy
+     * 
+     * @param state State to apply the strategy
+     * @return a move
      */
-    public int playStrategy(State state); 
+    public int playStrategy(State state);
 }

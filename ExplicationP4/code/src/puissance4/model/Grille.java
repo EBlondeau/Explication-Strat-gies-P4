@@ -107,6 +107,12 @@ public class Grille {
         return 0;
     }
 
+    /**
+     * 
+     * @param i
+     * @param j
+     * @return
+     */
     public int checkDiagonal(int i, int j) {
         int c = grille[i][j];
 
@@ -174,20 +180,16 @@ public class Grille {
                 }
             }
         }
-        /*
-         * for i height -4
-         * for j width -4
-         * if i> w-3 chechcolonne
-         * if j>h-3 chechligne
-         * else checkligne checkcolone check diag
-         * 
-         * 
-         * 
-         */
 
         return -1;
     }
 
+    /**
+     * copie une grille
+     * 
+     * @param g grille à copier
+     * @return une copie de la grille
+     */
     public Grille copyGrille(Grille g) {
         Grille res = new Grille(g.height, g.width);
         for (int i = 0; i < g.width; i++) {

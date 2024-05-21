@@ -21,6 +21,15 @@ public class AlphabetaTT extends AbstractAlgo {
         this(new TranspositionTable());
     }
 
+    /**
+     * 
+     * @param state State were we want to compute the value
+     * @param depth Max depth allowed
+     * @param alpha Alpha pruning parameter
+     * @param beta  beta Beta pruning parameter
+     * @param cpt   Node counter
+     * @return value of Node
+     */
     public int negAlphabeta(State state, int depth, int alpha, int beta, int cpt) {
         this.cpt = cpt;
         int alphOrig = alpha;

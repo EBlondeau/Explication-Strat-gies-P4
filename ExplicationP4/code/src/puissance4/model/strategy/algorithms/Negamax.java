@@ -6,20 +6,25 @@ import puissance4.model.State;
 
 public class Negamax extends AbstractAlgo {
 
+    /**
+     * 
+     * @param state la valeur State were we want to compute the value
+     * @param depth Max depth allowed
+     * @return value of Node
+     */
     public int algorithm(State state, int depth) {
         int gWidth = state.getGame().getWidth();
         int gHeight = state.getGame().getHeight();
 
-        int winner=state.hasWon();
-        if(winner!=0){
-            int i=-1;
-            if(winner==state.getCurrentPlayer().getId()){
-                i=1;
+        int winner = state.hasWon();
+        if (winner != 0) {
+            int i = -1;
+            if (winner == state.getCurrentPlayer().getId()) {
+                i = 1;
             }
-            return i*((gWidth * gHeight)+1 - state.nbMoves())/ 2; 
+            return i * ((gWidth * gHeight) + 1 - state.nbMoves()) / 2;
         }
 
-        // Check for a draw
         if (state.isFull() || depth == 0) {
             return 0;
         }
